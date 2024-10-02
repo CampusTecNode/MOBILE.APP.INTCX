@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="sv_activity_transition_animation_duration">
+        @android:integer/config_shortAnimTime
+    </integer>
+    <integer name="sv_list_view_items_translate_animation_duration">350</integer>
+    <integer name="sv_list_view_items_translate_animation_offset">100</integer>
+    <integer name="sv_list_view_items_translate_animation_initial_delay">150</integer>
+    <integer name="sv_cache_credit_cards_time_six_hours">21600000</integer>
+    <integer name="sv_cache_loan_time_two_minute">120000</integer>
+    <integer name="sv_cache_credit_cards_time">60000</integer>
+    <integer name="sv_cache_twelve_hours">43200000</integer>
+    <integer name="sv_cache_one_day">86400000</integer>
+    <integer name="sv_document_type_cedula_length">13</integer>
+    <integer name="sv_document_type_recover_password_length">11</integer>
+    <integer name="sv_service_number_length">14</integer>
+    <integer name="sv_cache_payment_button_time">60000</integer>
+
+</resources>

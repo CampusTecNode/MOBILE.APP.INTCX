@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">IntecConnect</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="iniciar_sesi_n">Acceder</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="adasdasdd">123456789</string>
+    <string name="introduzca_su_contrase_a">Introduzca su contraseña</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="matricula">Matricula</string>
+    <string name="introduzca_su_matricula">Introduzca su matricula</string>
+    <string name="o">O</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="_1114226">1114226</string>
+    <string name="title_activity_home_activitys">Home_Activitys</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Likes</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="inicio">Inicio</string>
+    <string name="me_gusta">Me gusta</string>
+    <string name="notificaciones">Notificacion</string>
+    <string name="perfil">Perfil</string>
+</resources>
