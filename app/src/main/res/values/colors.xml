@@ -5,13 +5,13 @@
 
     <color name="red_sub">#41E4002B</color>
     <color name="hint_color">#B4B3B3</color>
-    <color name="ligth_gray">#DDD6D6</color>
+    <color name="light_gray">#DDD6D6</color>
 
     <color name="primary_color">#E4002B</color>
     <color name="text_color_dark">#FFFFFF</color>
     <color name="text_color_light">#000000</color>
 
-    <color name="app_background_light">#FFFFFF</color>
+    <color name="app_background_light">#F8F9FA</color>
     <color name="app_background_dark">#1A2530</color>
 
     <color name="default_icon_color">#808080</color>
@@ -22,7 +22,8 @@
 
     <color name="yellow">#FFEB3B</color>
     <color name="green">#4CAF50</color>
-
+    <color name="edit_text_color_dark">#161F28</color>
+    <color name="edit_text_color_light">#FFFFFF</color>
 
 
     <color name="rippleColor">#03FF72</color>
