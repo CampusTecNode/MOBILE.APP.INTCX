@@ -40,10 +40,10 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="invisible"
             android:layout_marginHorizontal="7dp"
             android:layout_marginTop="207dp"
             android:background="@drawable/rounded_background_light"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,11 +65,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/bienvenido"
                 android:textColor="?android:attr/textColor"
                 android:textSize="28sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +100,7 @@
                 android:text="@string/_1114226"
                 android:textColor="?android:attr/editTextColor"
                 android:textColorHint="?android:attr/textColorHint"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vat_id"
@@ -127,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="password"
                 android:background="@drawable/rounded_edittext"
                 android:hint="@string/introduzca_su_contrase_a"
                 android:inputType="textPassword"
@@ -134,7 +134,7 @@
                 android:text="@string/adasdasdd"
                 android:textColor="?android:attr/editTextColor"
                 android:textColorHint="?android:attr/textColorHint"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -147,7 +147,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/olvidaste_tu_contrase_a"
                 android:textColor="?android:attr/textColor"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
                 app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
@@ -169,7 +169,7 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/rounded_button"
                     android:backgroundTint="?attr/colorPrimary"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/iniciar_sesi_n"
                     android:textColor="?android:attr/textAppearanceButton"
                     android:textSize="18sp" />
@@ -186,7 +186,7 @@
                         android:id="@+id/start_line"
                         android:layout_width="200dp"
                         android:layout_height="2dp"
-                        android:background="@color/ligth_gray" />
+                        android:background="@color/light_gray" />
 
                     <TextView
                         android:id="@+id/orTextView"
@@ -202,7 +202,7 @@
                         android:id="@+id/end_line"
                         android:layout_width="200dp"
                         android:layout_height="2dp"
-                        android:background="@color/ligth_gray" />
+                        android:background="@color/light_gray" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -214,13 +214,14 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/outlookButton"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
+                        android:background="@drawable/rounded_button"
+                        android:fontFamily="@font/poppins_regular"
                         android:text="@string/microsoft"
                         android:textColor="?android:attr/textColor"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
+                        app:backgroundTint="?android:attr/editTextBackground"
                         app:icon="@drawable/ic_microsoft"
                         app:iconGravity="textStart"
                         app:iconTint="@null" />

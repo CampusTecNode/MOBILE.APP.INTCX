@@ -5,7 +5,8 @@
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
         <item name="android:textColorHint">@color/hint_color</item>
-        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -21,7 +22,8 @@
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
         <item name="android:textColorHint">@color/hint_color</item>
-        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -39,7 +41,8 @@
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
         <item name="android:textColorHint">@color/hint_color</item>
-        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
