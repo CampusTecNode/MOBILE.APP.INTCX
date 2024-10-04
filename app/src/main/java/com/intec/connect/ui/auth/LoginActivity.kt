@@ -141,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
         } else if (e.message?.contains("No internet connection") == true) {
             Pair(getString(R.string.no_internet_message), R.raw.wifi)
         } else {
-            Pair(getString(R.string.service_unavailable), R.raw.errorx)
+            Pair(getString(R.string.service_unavailable), R.raw.error)
         }
 
         val dialogFragment = ErrorDialogFragment.newInstance(message, lottieRawRes)
