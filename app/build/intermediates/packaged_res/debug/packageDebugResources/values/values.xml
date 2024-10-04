@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_background_dark">#1A2530</color>
+    <color name="app_background_light">#F8F9FA</color>
+    <color name="backgroundColor">#FF5722</color>
+    <color name="black">#FF000000</color>
+    <color name="color1">#00B1FF</color>
+    <color name="color2">#FF0303</color>
+    <color name="color3">#0028FF</color>
+    <color name="dark_background_color">#121212</color>
+    <color name="default_icon_color">#808080</color>
+    <color name="edit_text_color_dark">#161F28</color>
+    <color name="edit_text_color_light">#FFFFFF</color>
+    <color name="green">#4CAF50</color>
+    <color name="hint_color">#B4B3B3</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="indicatorColor">#03FF72</color>
+    <color name="light_background_color">#FFFFFF</color>
+    <color name="light_gray">#DDD6D6</color>
+    <color name="mainColor">#FF5722</color>
+    <color name="primary_color">#E4002B</color>
+    <color name="red_sub">#41E4002B</color>
+    <color name="red_transparent">#74F4B5B5</color>
+    <color name="rippleColor">#03FF72</color>
+    <color name="text_color_dark">#FFFFFF</color>
+    <color name="text_color_light">#000000</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFEB3B</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="rebound_distance">10dp</dimen>
+    <integer name="sv_activity_transition_animation_duration">
+        @android:integer/config_shortAnimTime
+    </integer>
+    <integer name="sv_cache_credit_cards_time">60000</integer>
+    <integer name="sv_cache_credit_cards_time_six_hours">21600000</integer>
+    <integer name="sv_cache_loan_time_two_minute">120000</integer>
+    <integer name="sv_cache_one_day">86400000</integer>
+    <integer name="sv_cache_payment_button_time">60000</integer>
+    <integer name="sv_cache_twelve_hours">43200000</integer>
+    <integer name="sv_document_type_cedula_length">13</integer>
+    <integer name="sv_document_type_recover_password_length">11</integer>
+    <integer name="sv_list_view_items_translate_animation_duration">350</integer>
+    <integer name="sv_list_view_items_translate_animation_initial_delay">150</integer>
+    <integer name="sv_list_view_items_translate_animation_offset">100</integer>
+    <integer name="sv_service_number_length">14</integer>
+    <string name="_1114226">111400</string>
+    <string name="accediendo">Accediendo...</string>
+    <string name="accessing">Accediendo...</string>
+    <string name="adasdasdd">123456789</string>
+    <string name="app_name">IntecConnect</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="close">Cerrar</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesi_n">Acceder</string>
+    <string name="inicio">Inicio</string>
+    <string name="introduzca_su_contrase_a">Introduzca su contraseña</string>
+    <string name="introduzca_su_matricula">Introduzca su matricula</string>
+    <string name="invalid_credentials">El usuario o contraseña son incorrectos</string>
+    <string name="logo">logo</string>
+    <string name="matricula">Matricula</string>
+    <string name="me_gusta">Me gusta</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="no_internet_message">Para acceder debes tener activa la opción de datos y tener señal de la red o estar conectado vía Wi-Fi</string>
+    <string name="notificaciones">Notificacion</string>
+    <string name="o">O</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="perfil">Perfil</string>
+    <string name="pls_wait">Por favor espera</string>
+    <string name="por_favor_espera">Por favor espera</string>
+    <string name="service_unavailable">En estos momentos no se puede acceder al servicio. Inténtelo más tarde.</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_activity_home_activitys">Home_Activitys</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_dashboard">Likes</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="viewing_application">Consultando tu solicitud</string>
+    <style name="Base.Theme.IntecConnect" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_light</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:editTextBackground">@color/edit_text_color_light</item>
+        <item name="android:textColorSecondary">@color/text_color_light</item>
+        <item name="android:windowBackground">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@color/app_background_dark</item>
+        <item name="bottomAppBarColor">@color/app_background_light</item>
+        <item name="android:statusBarColor">@color/app_background_light</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+    </style>
+    <style name="Base.Theme.IntecConnect.BottomNavigation" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_light</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:editTextBackground">@color/edit_text_color_light</item>
+        <item name="android:textColorSecondary">@color/text_color_light</item>
+        <item name="android:windowBackground">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="bottomAppBarColor">@color/app_background_light</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/app_background_light</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.AppCompat.BottomNavigationView</item>
+
+    </style>
+    <style name="Base.Theme.IntecConnect.LoginActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_light</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextBackground">@color/edit_text_color_light</item>
+        <item name="android:editTextColor">@color/text_color_light</item>
+        <item name="android:textColorSecondary">@color/text_color_light</item>
+        <item name="android:windowBackground">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="bottomAppBarColor">@color/app_background_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/primary_color</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+    </style>
+    <style name="BottomNavItemTextAppearanceActive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="BottomNavItemTextAppearanceInactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/red_transparent</item>
+    </style>
+    <style name="RoundedAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@color/app_background_light</item>
+    </style>
+    <style name="Theme.BottomNavigationApp.BottomNavigationView" parent="Theme.MaterialComponents">
+        <item name="bottomNavigationStyle">@style/Widget.AppCompat.BottomNavigationView</item>
+    </style>
+    <style name="Theme.IntecConnect" parent="Base.Theme.IntecConnect"/>
+    <style name="Widget.AppCompat.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/BottomNavigationView</item>
+
+        <item name="itemTextAppearanceActive">@style/BottomNavItemTextAppearanceActive</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavItemTextAppearanceInactive</item>
+    </style>
+    <declare-styleable name="BottomAppBar">
+        <attr format="color" name="bottomAppBarColor"/>
+    </declare-styleable>
+</resources>
