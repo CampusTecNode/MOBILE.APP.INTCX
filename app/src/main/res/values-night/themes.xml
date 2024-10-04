@@ -80,4 +80,9 @@
         <item name="fontFamily">@font/poppins_regular</item>
     </style>
 
+    <style name="RoundedAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@color/app_background_light</item>
+    </style>
+
 </resources>

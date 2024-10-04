@@ -1,0 +1,3 @@
+com.intec.connect.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

@@ -1,0 +1,5 @@
+com.intec.connect.test.app-core-1.6.1-0 /Users/andersonperez/.gradle/caches/transforms-4/95ced3b0e64cee62549e656b09b65625/transformed/core-1.6.1/res
+com.intec.connect.test.app-androidTest-1 /Users/andersonperez/AndroidStudioProjects/IntecConnect/app/build/generated/res/resValues/androidTest/debug
+com.intec.connect.test.app-mergeDebugAndroidTestResources-2 /Users/andersonperez/AndroidStudioProjects/IntecConnect/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.intec.connect.test.app-mergeDebugAndroidTestResources-3 /Users/andersonperez/AndroidStudioProjects/IntecConnect/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.intec.connect.test.app-debugAndroidTest-4 /Users/andersonperez/AndroidStudioProjects/IntecConnect/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources

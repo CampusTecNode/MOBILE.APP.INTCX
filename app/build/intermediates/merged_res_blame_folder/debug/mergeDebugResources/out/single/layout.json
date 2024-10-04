@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/progress_dialog.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/fragment_profile.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/activity_bag.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_bag.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/fragment_home.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/fragment_dashboard.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/activity_splash.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/fragment_notifications.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/activity_bottom_navigation.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_bottom_navigation.xml"
+    },
+    {
+        "merged": "com.intec.connect.app-mergeDebugResources-49:/layout/progress_dialog.xml",
+        "source": "com.intec.connect.app-main-52:/layout/progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/error_dialog.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/error_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/activity_login.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-mergeDebugResources-49:/layout/fragment_setting.xml",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_setting.xml"
+    }
+]
