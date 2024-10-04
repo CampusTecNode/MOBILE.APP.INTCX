@@ -22,7 +22,7 @@ class ErrorDialogFragment : DialogFragment() {
         val closeButton: TextView = view.findViewById(R.id.close)
 
         val message = arguments?.getString(MESSAGE_KEY) ?: ""
-        val lottieRawRes = arguments?.getInt(LOTTIE_KEY) ?: R.raw.error
+        val lottieRawRes = arguments?.getInt(LOTTIE_KEY) ?: R.raw.errorx
 
         messageTextView.text = message
         lottieAnimationView.setAnimation(lottieRawRes)
