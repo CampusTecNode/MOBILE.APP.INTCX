@@ -1,18 +1,41 @@
 package com.intec.connect.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.intec.connect.data.model.ProductModel
+import com.intec.connect.data.model.CategoriesProducts
+import com.intec.connect.repository.RetrofitRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-    val productList = MutableLiveData<List<ProductModel>>()
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val categoriesProductsRepository: RetrofitRepository) :
+    ViewModel() {
 
+    private val _categoriesProducts = MutableLiveData<Result<CategoriesProducts>>()
+    val isLoading = MutableLiveData<Boolean>()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun getCategoriesProducts(tokenModel: String): MutableLiveData<Result<CategoriesProducts>> {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            try {
+                val categoriesProduct =
+                    categoriesProductsRepository.getCategoriesProducts(tokenModel)
+
+                if (!categoriesProduct.isEmpty()) {
+                    _categoriesProducts.value = Result.success(categoriesProduct)
+                    isLoading.postValue(false)
+                }
+
+            } catch (e: Exception) {
+                _categoriesProducts.value = Result.failure(e)
+            }
+
+        }
+
+        return _categoriesProducts
     }
-    val text: LiveData<String> = _text
+
 }

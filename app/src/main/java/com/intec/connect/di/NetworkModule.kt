@@ -1,8 +1,8 @@
 package com.intec.connect.di
 
 import com.intec.connect.api.RetrofitApiClient
-import com.intec.connect.constants.Constants
 import com.intec.connect.network.HeaderInterceptor
+import com.intec.connect.utilities.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +27,6 @@ object NetworkModule {
         .client(getClient())
         .build()
 
-
     private fun getClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.HEADERS
@@ -40,7 +39,6 @@ object NetworkModule {
             .addInterceptor(HeaderInterceptor())
             .build()
     }
-
 
     @Singleton
     @Provides

@@ -15,9 +15,11 @@
     <color name="app_background_dark">#1A2530</color>
 
     <color name="default_icon_color">#808080</color>
+    <color name="placeholder">#dddddd</color>
 
     <color name="light_background_color">#FFFFFF</color>
     <color name="dark_background_color">#121212</color>
+    <color name="dark_background_color_adapter_item">#161F28</color>
     <color name="red_transparent">#74F4B5B5</color>
     <color name="transparent">#00FFFFFF</color>
 
