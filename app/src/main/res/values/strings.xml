@@ -20,6 +20,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="inicio">Inicio</string>
     <string name="me_gusta">Me gusta</string>
-    <string name="notificaciones">Notificacion</string>
+    <string name="notificacion">Notificacion</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="configuration">Configuraciones</string>
+    <string name="faqs">Faqs</string>
     <string name="perfil">Perfil</string>
+    <string name="logout">Salir</string>
+
 </resources>

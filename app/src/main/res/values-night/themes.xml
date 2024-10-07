@@ -79,5 +79,8 @@
     <style name="BottomNavItemTextAppearanceInactive" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/poppins_regular</item>
     </style>
+    <style name="ImageStyle_Circle">
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>
