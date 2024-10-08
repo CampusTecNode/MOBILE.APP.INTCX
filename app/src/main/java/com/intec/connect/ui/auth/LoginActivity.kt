@@ -153,7 +153,6 @@ class LoginActivity : AppCompatActivity() {
     /**
      * Saves the authentication token and navigates to the main activity.
      *
-     * @param token The authentication token to be saved.
      */
     private fun saveTokenAndNavigate(tokenModel: TokenModel) {
         val sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)

@@ -2,6 +2,7 @@ package com.intec.connect.api
 
 import com.intec.connect.data.model.CategoriesProducts
 import com.intec.connect.data.model.LoginModel
+import com.intec.connect.data.model.Product
 import com.intec.connect.data.model.TokenModel
 import retrofit2.Response
 import retrofit2.http.Body
@@ -15,4 +16,7 @@ interface RetrofitApiClient {
 
     @GET("categories/")
     suspend fun categoriesProduct(@Header("Authorization") authHeader: String): Response<CategoriesProducts>
+
+    @GET("products/")
+    suspend fun products(@Header("Authorization") authHeader: String): Response<List<Product>>
 }

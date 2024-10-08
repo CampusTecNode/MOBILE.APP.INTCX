@@ -34,6 +34,14 @@
     <string name="no_internet_message">Para acceder debes tener activa la opción de datos y tener señal de la red o estar conectado vía Wi-Fi</string>
     <string name="product_name">Lapiz</string>
     <string name="best_seller">Mas vendido</string>
-    <string name="product_price">RD$12</string>
+    <string name="product_price">RD$</string>
+    <string name="buscar_productos">Buscar productos</string>
+    <string name="articulos_populares">Articulos populares</string>
+    <string name="category_name">category name</string>
+    <string name="categories">Categorias de productos</string>
+    <string name="_100_00">100.00</string>
+    <string name="like">like</string>
+    <string name="esta_categoria_no_tiene_productos_por_el_momento">Categria sin productos.</string>
+    <string name="no_se_encontraron_productos_para_la_b_squeda">No se encontro ningun producto para la búsqueda: %1$s</string>
 
 </resources>

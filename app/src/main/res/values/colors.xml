@@ -5,19 +5,22 @@
 
     <color name="red_sub">#41E4002B</color>
     <color name="hint_color">#B4B3B3</color>
+    <color name="hint_color_dark">#707B81</color>
     <color name="light_gray">#DDD6D6</color>
 
     <color name="primary_color">#E4002B</color>
     <color name="text_color_dark">#FFFFFF</color>
-    <color name="text_color_light">#000000</color>
+    <color name="text_color_light">#1A2530</color>
 
     <color name="app_background_light">#F8F9FA</color>
     <color name="app_background_dark">#1A2530</color>
 
     <color name="default_icon_color">#808080</color>
     <color name="placeholder">#dddddd</color>
+    <color name="search_color">#707B81</color>
+    <color name="search_color_dark">#707B81</color>
 
-    <color name="light_background_color">#FFFFFF</color>
+    <color name="light_background_color">#F8F9FA</color>
     <color name="dark_background_color">#121212</color>
     <color name="dark_background_color_adapter_item">#161F28</color>
     <color name="red_transparent">#74F4B5B5</color>
@@ -29,13 +32,7 @@
     <color name="edit_text_color_light">#FFFFFF</color>
 
 
-    <color name="rippleColor">#03FF72</color>
-    <color name="indicatorColor">#03FF72</color>
-    <color name="backgroundColor">#FF5722</color>
-    <color name="mainColor">#FF5722</color>
+    <color name="text_description">#C2C0C0</color>
 
-    <color name="color1">#00B1FF</color>
-    <color name="color2">#FF0303</color>
-    <color name="color3">#0028FF</color>
 
 </resources>
