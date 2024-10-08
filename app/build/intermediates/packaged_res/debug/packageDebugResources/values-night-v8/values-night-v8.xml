@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.IntecConnect" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_dark</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="bottomAppBarColor">@color/app_background_dark</item>
+        <item name="android:statusBarColor">@color/app_background_dark</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <style name="Base.Theme.IntecConnect.BottomNavigation" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_dark</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="bottomAppBarColor">@color/app_background_dark</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/app_background_dark</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <style name="Base.Theme.IntecConnect.LoginActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_dark</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="bottomAppBarColor">@color/app_background_dark</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/primary_color</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+    </style>
+    <style name="BottomNavItemTextAppearanceActive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="BottomNavItemTextAppearanceInactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/red_transparent</item>
+    </style>
+    <style name="RoundedAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@color/app_background_light</item>
+    </style>
+    <style name="Theme.BottomNavigationApp.BottomNavigationView" parent="Theme.MaterialComponents">
+        <item name="bottomNavigationStyle">@style/Widget.AppCompat.BottomNavigationView</item>
+    </style>
+    <style name="Theme.IntecConnect" parent="Base.Theme.IntecConnect"/>
+    <style name="Widget.AppCompat.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/BottomNavigationView</item>
+
+        <item name="itemTextAppearanceActive">@style/BottomNavItemTextAppearanceActive</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavItemTextAppearanceInactive</item>
+    </style>
+</resources>

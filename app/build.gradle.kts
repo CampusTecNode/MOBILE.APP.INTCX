@@ -36,7 +36,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
@@ -48,18 +48,40 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.lottie)
 
-    implementation (libs.hilt.android)
+    implementation(libs.hilt.android)
 
     implementation(libs.androidx.navigation.fragment.ktx.v275)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //Dagger - Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    // ViewModel
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    //Shimmer
+    implementation(libs.shimmer)
+
+    //Hashed
+    implementation(libs.bcprov.jdk15on)
+
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+    testImplementation (libs.junit)
+
+
+    implementation(libs.symbol.processing.api)
+    implementation(libs.kotlin.parcelize.runtime)
 }

@@ -1,0 +1,366 @@
+[
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_regular.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_regular.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_bag.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/bag.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_like_icon_selector.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/like_icon_selector.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_to_right.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_to_right.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_selector_bottom_nav_icon.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/selector_bottom_nav_icon.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_fragment_home.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_background_red.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_background_red.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/animator_fragment_transition_fade_in_animation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/animator/fragment_transition_fade_in_animation.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_from_left.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_from_left.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_fragment_notifications.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_from_bottom.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_person_24dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/person_24dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_fade_out_animation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_fade_out_animation.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_home_24dp_fill.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/home_24dp_fill.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_home_icon_selector.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/home_icon_selector.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_wifi.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/wifi.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_notifications_24dp_fill1.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/notifications_24dp_fill1.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_black.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_black.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_semi_bold.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_semi_bold.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_bottom_nav_background_night.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/bottom_nav_background_night.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_error_dialog.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/error_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_edittext.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_edittext.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_activity_bottom_navigation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_bottom_navigation.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_button.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_button.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/color_bottom_app_bar_color.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/color/bottom_app_bar_color.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_notification_icon_selector.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/notification_icon_selector.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_profile_icon_selector.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/profile_icon_selector.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_to_left.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_to_left.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_background.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_background.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_bag_fill.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/bag_fill.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_succes.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/succes.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_activity_splash.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_home_24dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/home_24dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_fragment_dashboard.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/xml_backup_rules.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/menu_fab_with_bottom.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/menu/fab_with_bottom.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_ic_microsoft.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/ic_microsoft.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_fade_in_animation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_fade_in_animation.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_light.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_light.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_favorite_24dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/favorite_24dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_person_24dp_fill.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/person_24dp_fill.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_bottom_nav_shape.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/bottom_nav_shape.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/animator_bottom_nav_text_state_list_animator.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/animator/bottom_nav_text_state_list_animator.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/animator_fragment_transition_fade_out_animation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/animator/fragment_transition_fade_out_animation.xml"
+    },
+    {
+        "merged": "com.intec.connect.app-debug-50:/drawable_rounded_background.xml.flat",
+        "source": "com.intec.connect.app-main-52:/drawable/rounded_background.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_to_bottom.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_progress_dialog.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_medium.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_medium.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_errorx.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/errorx.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_activity_bag.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_bag.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_selected_item_background.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/selected_item_background.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_error.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/error.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_favorite_24dp_fill.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/favorite_24dp_fill.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/color_bottom_nav_item_color.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/color/bottom_nav_item_color.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_warning.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/warning.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_logo.png.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/logo.png"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_activity_login.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_thin.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_thin.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_stay_visible.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_stay_visible.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_background_light.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_background_light.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_button_light.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_button_light.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/navigation_mobile_navigation.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/navigation/mobile_navigation.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_extra_light.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_extra_light.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_vector.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/vector.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_fragment_profile.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_rounded_background_8dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/rounded_background_8dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_bottom_nav_background.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/bottom_nav_background.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_notifications_24dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/notifications_24dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_bold.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_bold.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/anim_activity_transition_from_right.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/anim/activity_transition_from_right.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_add_shopping_cart_24dp.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/add_shopping_cart_24dp.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/font_poppins_extra_bold.ttf.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/font/poppins_extra_bold.ttf"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/raw_loading.json.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/raw/loading.json"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/drawable_abeja_intec.png.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/drawable/abeja_intec.png"
+    },
+    {
+        "merged": "com.intec.connect.app-debug-50:/layout_progress_dialog.xml.flat",
+        "source": "com.intec.connect.app-main-52:/layout/progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-debug-50:/layout_fragment_setting.xml.flat",
+        "source": "/Users/andersonperez/.gradle/daemon/8.7/com.intec.connect.app-main-52:/layout/fragment_setting.xml"
+    }
+]

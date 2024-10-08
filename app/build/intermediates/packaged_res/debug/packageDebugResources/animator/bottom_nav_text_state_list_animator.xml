@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <set>
+            <objectAnimator
+                android:propertyName="fontFamily"
+                android:valueTo="@font/poppins_bold"
+                android:valueType="intType" />
+        </set>
+    </item>
+    <item>
+        <set>
+            <objectAnimator
+                android:propertyName="fontFamily"
+                android:valueTo="@font/poppins_regular"
+                android:valueType="intType" />
+        </set>
+    </item>
+</selector>
