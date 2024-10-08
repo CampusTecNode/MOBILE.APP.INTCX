@@ -10,6 +10,10 @@
         android:name="com.intec.connect.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="auth_token"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 
     <fragment

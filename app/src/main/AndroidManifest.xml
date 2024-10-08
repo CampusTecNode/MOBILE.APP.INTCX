@@ -21,7 +21,7 @@
             android:name=".ui.activities.BottomNavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_bottom_navigation"
-            android:theme="@style/Base.Theme.IntecConnect.BottomNavigation" />
+            android:theme="@style/Base.Theme.IntecConnect.Fragments.view" />
 
         <activity
             android:name=".ui.activities.SplashScreen"
@@ -43,7 +43,7 @@
             android:name=".ui.activities.BagActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Base.Theme.IntecConnect" />
+            android:theme="@style/Base.Theme.IntecConnect.Fragments.view" />
     </application>
 
 </manifest>

@@ -4,55 +4,86 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
-        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textColorHint">@color/hint_color_dark</item>
         <item name="android:editTextColor">@color/text_color_dark</item>
         <item name="android:editTextBackground">@color/edit_text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
+        <item name="backgroundColor">@color/dark_background_color_adapter_item</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="bottomAppBarColor">@color/app_background_dark</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomAppBarColor">@color/dark_background_color_adapter_item</item>
+
         <item name="android:statusBarColor">@color/app_background_dark</item>
 
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="tickColorActive">@color/search_color_dark</item>
+        <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
+
+    </style>
+
+    <style name="Base.Theme.IntecConnect.Fragments.view" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColor">@color/text_color_dark</item>
+        <item name="android:textAppearanceButton">@color/text_color_dark</item>
+        <item name="android:textColorHint">@color/hint_color_dark</item>
+        <item name="android:editTextColor">@color/text_color_dark</item>
+        <item name="android:editTextBackground">@color/edit_text_color_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_dark</item>
+        <item name="android:windowBackground">@color/app_background_dark</item>
+        <item name="backgroundColor">@color/dark_background_color_adapter_item</item>
+
+        <item name="bottomAppBarColor">@color/dark_background_color_adapter_item</item>
+
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/dark_background_color_adapter_item</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="tickColorActive">@color/search_color_dark</item>
+        <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
     </style>
 
     <style name="Base.Theme.IntecConnect.LoginActivity" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
-        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textColorHint">@color/hint_color_dark</item>
         <item name="android:editTextBackground">@color/edit_text_color_dark</item>
         <item name="android:editTextColor">@color/text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="bottomAppBarColor">@color/app_background_dark</item>
+        <item name="bottomAppBarColor">@color/dark_background_color_adapter_item</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/primary_color</item>
-
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
-
+        <item name="tickColorActive">@color/search_color_dark</item>
+        <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
     </style>
 
     <style name="Base.Theme.IntecConnect.BottomNavigation" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
         <item name="android:textColor">@color/text_color_dark</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
-        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textColorHint">@color/hint_color_dark</item>
         <item name="android:editTextBackground">@color/edit_text_color_dark</item>
         <item name="android:editTextColor">@color/text_color_dark</item>
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="bottomAppBarColor">@color/app_background_dark</item>
-
+        <item name="bottomAppBarColor">@color/dark_background_color_adapter_item</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/app_background_dark</item>
-
+        <item name="tickColorActive">@color/search_color_dark</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
+
     </style>
 
     <style name="Theme.IntecConnect" parent="Base.Theme.IntecConnect" />
@@ -83,6 +114,15 @@
     <style name="RoundedAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackground">@color/app_background_light</item>
+    </style>
+
+    <style name="Product.Name" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Product.Price" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/primary_color</item>
     </style>
 
 </resources>

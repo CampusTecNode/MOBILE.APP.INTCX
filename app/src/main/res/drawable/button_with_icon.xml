@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/rounded_button_add_to_cart" />
+    <item
+        android:drawable="@drawable/add_shopping_cart_24dp"
+        android:gravity="center_vertical|center_horizontal" />
+</layer-list>
