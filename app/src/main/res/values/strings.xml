@@ -43,5 +43,8 @@
     <string name="like">like</string>
     <string name="esta_categoria_no_tiene_productos_por_el_momento">Categria sin productos.</string>
     <string name="no_se_encontraron_productos_para_la_b_squeda">No se encontro ningun producto para la búsqueda: %1$s</string>
-
+    <string name="notificacion">Notificacion</string>
+    <string name="configuration">Configuraciones</string>
+    <string name="faqs">Faqs</string>
+    <string name="logout">Salir</string>
 </resources>
