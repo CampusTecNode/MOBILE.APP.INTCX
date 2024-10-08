@@ -1,18 +1,72 @@
 package com.intec.connect.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.intec.connect.data.model.ProductModel
+import com.intec.connect.data.model.CategoriesProducts
+import com.intec.connect.data.model.Product
+import com.intec.connect.repository.RetrofitRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-    val productList = MutableLiveData<List<ProductModel>>()
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val categoriesProductsRepository: RetrofitRepository) :
+    ViewModel() {
 
+    private val _categoriesProducts = MutableLiveData<Result<CategoriesProducts>>()
+    private val _products = MutableLiveData<Result<List<Product>>>()
+    val isLoading = MutableLiveData<Boolean>()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    /**
+     * Fetches categories and their associated products from the repository.
+     *
+     * @param tokenModel The authentication token for the API request.
+     * @return LiveData holding the [Result] of the operation.
+     */
+    fun getCategoriesProducts(tokenModel: String): MutableLiveData<Result<CategoriesProducts>> {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            try {
+                val categoriesProduct =
+                    categoriesProductsRepository.getCategoriesProducts(tokenModel)
+
+                if (!categoriesProduct.isEmpty()) {
+                    _categoriesProducts.value = Result.success(categoriesProduct)
+                    isLoading.postValue(false)
+                }
+
+            } catch (e: Exception) {
+                _categoriesProducts.value = Result.failure(e)
+                isLoading.postValue(false)
+            }
+
+        }
+
+        return _categoriesProducts
     }
-    val text: LiveData<String> = _text
+
+    /**
+     * Fetches all products from the repository.
+     *
+     * @param tokenModel The authentication token for the API request.
+     * @return LiveData holding the [Result] of the operation.
+     */
+    fun getProducts(tokenModel: String): MutableLiveData<Result<List<Product>>> {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            try {
+                val products = categoriesProductsRepository.getProducts(tokenModel)
+                _products.value = Result.success(products)
+            } catch (e: Exception) {
+                _products.value = Result.failure(e)
+            } finally {
+                isLoading.postValue(false)
+            }
+        }
+
+        return _products
+    }
 }

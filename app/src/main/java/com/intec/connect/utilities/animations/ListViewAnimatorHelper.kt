@@ -111,7 +111,7 @@ class ListViewAnimatorHelper {
      */
     fun animateViewIfNecessary(
         position: Int, view: View,
-        animators: Array<Animator?>
+        animators: Array<Animator>
     ) {
         if (position > lastAnimatedPosition) {
             if (firstAnimatedPosition == -1) {
@@ -133,7 +133,7 @@ class ListViewAnimatorHelper {
      */
     fun animateView(
         position: Int, view: View,
-        animators: Array<Animator?>
+        animators: Array<Animator>
     ) {
         if (animationStart == -1L) {
             animationStart = SystemClock.uptimeMillis()

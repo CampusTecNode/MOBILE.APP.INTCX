@@ -17,10 +17,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.intec.connect.R
-import com.intec.connect.constants.Constants
 import com.intec.connect.data.model.LoginModel
+import com.intec.connect.data.model.TokenModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
+import com.intec.connect.utilities.Constants
+import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.ErrorDialogFragment
 import com.intec.connect.utilities.animations.ReboundAnimator
 import dagger.hilt.android.AndroidEntryPoint
@@ -122,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
             handler.removeCallbacks(updateMessageRunnable)
 
             result.onSuccess { tokenModel ->
-                saveTokenAndNavigate(tokenModel.toString())
+                saveTokenAndNavigate(tokenModel)
             }.onFailure { e ->
                 Log.e("LoginActivity", "Login failed", e as Exception)
                 showErrorAlertDialog(e)
@@ -151,18 +153,19 @@ class LoginActivity : AppCompatActivity() {
     /**
      * Saves the authentication token and navigates to the main activity.
      *
-     * @param token The authentication token to be saved.
      */
-    private fun saveTokenAndNavigate(token: String) {
+    private fun saveTokenAndNavigate(tokenModel: TokenModel) {
         val sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        sharedPrefs.edit().putString("auth_token", token).apply()
+        sharedPrefs.edit().putString(TOKEN_KEY, tokenModel.token).apply()
 
         val intent = Intent(this, BottomNavigationActivity::class.java)
+
         val options = ActivityOptionsCompat.makeCustomAnimation(
             this,
             R.anim.activity_transition_from_right,
             R.anim.activity_transition_stay_visible
         )
+
         startActivity(intent, options.toBundle())
         finish()
     }

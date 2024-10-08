@@ -10,7 +10,7 @@
     <string name="introduzca_su_matricula">Introduzca su matricula</string>
     <string name="o">O</string>
     <string name="bienvenido">Bienvenido</string>
-    <string name="_1114226">111400</string>
+    <string name="_1114226">111401</string>
     <string name="title_activity_home_activitys">Home_Activitys</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Likes</string>
@@ -32,4 +32,16 @@
     <string name="close">Cerrar</string>
     <string name="service_unavailable">En estos momentos no se puede acceder al servicio. Inténtelo más tarde.</string>
     <string name="no_internet_message">Para acceder debes tener activa la opción de datos y tener señal de la red o estar conectado vía Wi-Fi</string>
+    <string name="product_name">Lapiz</string>
+    <string name="best_seller">Mas vendido</string>
+    <string name="product_price">RD$</string>
+    <string name="buscar_productos">Buscar productos</string>
+    <string name="articulos_populares">Articulos populares</string>
+    <string name="category_name">category name</string>
+    <string name="categories">Categorias de productos</string>
+    <string name="_100_00">100.00</string>
+    <string name="like">like</string>
+    <string name="esta_categoria_no_tiene_productos_por_el_momento">Categria sin productos.</string>
+    <string name="no_se_encontraron_productos_para_la_b_squeda">No se encontro ningun producto para la búsqueda: %1$s</string>
+
 </resources>
