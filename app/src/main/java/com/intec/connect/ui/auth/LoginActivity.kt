@@ -17,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.intec.connect.R
+import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.LoginModel
-import com.intec.connect.data.model.TokenModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
+import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.ErrorDialogFragment
 import com.intec.connect.utilities.animations.ReboundAnimator
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,9 +155,10 @@ class LoginActivity : AppCompatActivity() {
      * Saves the authentication token and navigates to the main activity.
      *
      */
-    private fun saveTokenAndNavigate(tokenModel: TokenModel) {
+    private fun saveTokenAndNavigate(authResponse: AuthResponse) {
         val sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        sharedPrefs.edit().putString(TOKEN_KEY, tokenModel.token).apply()
+        sharedPrefs.edit().putString(TOKEN_KEY, authResponse.token).apply()
+        sharedPrefs.edit().putString(USERID_KEY, authResponse.userID).apply()
 
         val intent = Intent(this, BottomNavigationActivity::class.java)
 

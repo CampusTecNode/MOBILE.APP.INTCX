@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.intec.connect.R
 import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
+import com.intec.connect.interfaces.LikeClickListener
 import com.intec.connect.ui.holders.CategoryProductViewHolder
 import com.intec.connect.utilities.animations.ListViewAnimatorHelper
 import com.intec.connect.utilities.animations.ReboundAnimator
@@ -28,6 +29,7 @@ import com.intec.connect.utilities.animations.ReboundAnimator
  */
 class CategoriesProductAdapter(
     private val clickListener: ClickListener<Product>,
+    private val likeClickListener: LikeClickListener,
     private val context: Activity?,
     private val recyclerView: RecyclerView,
 ) : RecyclerView.Adapter<CategoryProductViewHolder>() {
@@ -60,7 +62,11 @@ class CategoriesProductAdapter(
         reboundAnimatorManager =
             context?.let { ReboundAnimator(it, ReboundAnimator.ReboundAnimatorType.RIGHT_TO_LEFT) }
 
-        return CategoryProductViewHolder(itemView = layout, listener = clickListener)
+        return CategoryProductViewHolder(
+            itemView = layout,
+            listener = clickListener,
+            likeClickListener = likeClickListener
+        )
 
     }
 
@@ -79,16 +85,17 @@ class CategoriesProductAdapter(
 
         holder.productName.text = product.name
         holder.productDescription.text = product.description
-        holder.productPrice.text = product.price
+        holder.productPrice.text = product.price.split(".")[0]
         if (product.imageURL.isNotEmpty()) {
             context?.let {
-                Glide.with(it) // Use 'it' to refer to the Activity context
+                Glide.with(it)
                     .load(product.imageURL)
                     .into(holder.productImage)
             }
         } else {
             holder.productImage.setImageResource(R.drawable.mascotas)
         }
+
 
         val animators: Array<Animator> =
             reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView.rootView)
@@ -133,7 +140,7 @@ class CategoriesProductAdapter(
         this.categoriesProducts.addAll(categoriesProducts)
         this.originalProductList = categoriesProducts
         this.filteredProductList = categoriesProducts
-        filter("") // Initialize filtered list with all products
+        filter("")
         notifyDataSetChanged()
     }
 

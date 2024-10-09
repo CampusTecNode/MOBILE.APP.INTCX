@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.LoginModel
-import com.intec.connect.data.model.TokenModel
 import com.intec.connect.repository.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +15,8 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(private val authRepository: RetrofitRepository) :
     ViewModel() {
 
-    private val _loginResult = MutableLiveData<Result<TokenModel>>()
-    val loginResult: LiveData<Result<TokenModel>> = _loginResult
+    private val _loginResult = MutableLiveData<Result<AuthResponse>>()
+    val loginResult: LiveData<Result<AuthResponse>> = _loginResult
 
     fun loginUser(loginModel: LoginModel) {
         viewModelScope.launch {

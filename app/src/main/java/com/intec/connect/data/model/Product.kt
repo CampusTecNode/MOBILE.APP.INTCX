@@ -13,5 +13,6 @@ data class Product(
     @SerializedName("Price") val price: String,
     @SerializedName("Stock") val stock: Int,
     @SerializedName("UpdatedAt") val updatedAt: String,
-    @SerializedName("UpdatedBy") val updatedBy: String
+    @SerializedName("UpdatedBy") val updatedBy: String,
+    @SerializedName("liked") var liked: Boolean = false
 )
