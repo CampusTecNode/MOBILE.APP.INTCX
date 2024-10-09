@@ -25,11 +25,13 @@ import com.intec.connect.data.model.CategoriesProductsItem
 import com.intec.connect.data.model.Product
 import com.intec.connect.databinding.FragmentHomeBinding
 import com.intec.connect.interfaces.ClickListener
+import com.intec.connect.interfaces.LikeClickListener
 import com.intec.connect.ui.activities.BottomNavigationActivity
 import com.intec.connect.ui.adapters.CategoriesAdapter
 import com.intec.connect.ui.adapters.CategoriesProductAdapter
 import com.intec.connect.ui.adapters.ProductAdapter
 import com.intec.connect.utilities.Constants.TOKEN_KEY
+import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.animations.ReboundAnimator
 import com.intec.connect.utilities.animations.ReboundAnimator.ReboundAnimatorType
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +53,7 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var categoriesProductAdapter: CategoriesProductAdapter
     private lateinit var productAdapter: ProductAdapter
+    private val likedProducts = mutableSetOf<Int>()
 
     /**
      * Inflates the fragment's view and returns the root view.
@@ -120,9 +123,13 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         if (isLoading) {
             binding.shimmerFrameLayoutHomeView.visibility = View.VISIBLE
             binding.shimmerFrameLayoutHomeView.startShimmer()
+            // Hide the content views while loading
+            binding.mainContainer.visibility = View.GONE
         } else {
             binding.shimmerFrameLayoutHomeView.stopShimmer()
             binding.shimmerFrameLayoutHomeView.visibility = View.GONE
+            // Show the content views after loading
+            binding.mainContainer.visibility = View.VISIBLE
         }
     }
 
@@ -190,6 +197,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * Sets up the RecyclerView for category-specific products and assigns the adapter.
      */
     private fun setupCategoriesProductsRecyclerView() {
+        val sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val token = sharedPrefs.getString(TOKEN_KEY, "")
+        val userId = sharedPrefs.getString(USERID_KEY, "")
+
         binding.recyclerViewProducts.setHasFixedSize(true)
         binding.recyclerViewProducts.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -197,6 +208,32 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             override fun onClick(view: View, item: Product, position: Int) {
                 Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
             }
+        }, object : LikeClickListener {
+            override fun onLike(product: Product, position: Int) {
+                if (likedProducts.contains(product.id)) {
+                    Toast.makeText(context, "Product already liked", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                likedProducts.add(product.id)
+
+                if (token != null && userId != null) {
+                    homeViewModel.likeProduct(userId, product.id.toString(), token)
+                } else {
+                    // Handle the case where token or userId is null (e.g., user not logged in)
+                }
+            }
+
+            override fun onUnlike(product: Product, position: Int) {
+                if (token != null && userId != null) {
+                    homeViewModel.unlikeProduct(userId, product.id.toString(), token)
+                } else {
+                    // Handle the case where token or userId is null (e.g., user not logged in)
+                }
+
+                likedProducts.remove(product.id)
+            }
+
         }, requireActivity(), binding.recyclerViewProducts)
         binding.recyclerViewProducts.adapter = categoriesProductAdapter
     }
@@ -212,6 +249,43 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             override fun onClick(view: View, item: Product, position: Int) {
                 Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
             }
+        }, object : LikeClickListener {
+            override fun onLike(product: Product, position: Int) {
+
+                if (likedProducts.contains(product.id)) {
+                    Toast.makeText(context, "Product already liked", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                likedProducts.add(product.id)
+                val sharedPrefs =
+                    requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                val token = sharedPrefs.getString(TOKEN_KEY, "")
+                val userId = sharedPrefs.getString(USERID_KEY, "")
+
+                if (token != null && userId != null) {
+                    homeViewModel.likeProduct(userId, product.id.toString(), token)
+                } else {
+                    // Handle the case where token or userId is null (e.g., user not logged in)
+                }
+
+            }
+
+            override fun onUnlike(product: Product, position: Int) {
+                val sharedPrefs =
+                    requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                val token = sharedPrefs.getString(TOKEN_KEY, "")
+                val userId = sharedPrefs.getString(USERID_KEY, "")
+
+                if (token != null && userId != null) {
+                    homeViewModel.unlikeProduct(userId, product.id.toString(), token)
+                } else {
+                    // Handle the case where token or userId is null (e.g., user not logged in)
+                }
+
+                likedProducts.remove(product.id)
+            }
+
         }, requireActivity(), binding.recyclerViewAllProducts)
         binding.recyclerViewAllProducts.adapter = productAdapter
     }

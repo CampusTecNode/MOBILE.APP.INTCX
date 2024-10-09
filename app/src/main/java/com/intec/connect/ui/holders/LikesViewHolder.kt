@@ -17,7 +17,7 @@ import com.intec.connect.interfaces.LikeClickListener
  * @param itemView The view representing a single item in the RecyclerView.
  * @param listener The click listener interface to handle click events on products.
  */
-class CategoryProductViewHolder(
+class LikesViewHolder(
     itemView: View,
     listener: ClickListener<Product>,
     private val likeClickListener: LikeClickListener
@@ -43,18 +43,14 @@ class CategoryProductViewHolder(
 
             val product = item ?: return@setOnClickListener
 
-            if (isLiked) {
-                likeClickListener.onLike(product, adapterPosition)
-            } else {
+            if (!isLiked) {
                 likeClickListener.onUnlike(product, adapterPosition)
             }
         }
     }
 
     private fun updateFavoriteButtonAppearance() {
-        if (isLiked) {
-            favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
-        } else {
+        if (!isLiked) {
             favoriteButton.setImageResource(R.drawable.favorite_24dp_fill)
         }
     }

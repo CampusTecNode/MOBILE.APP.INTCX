@@ -2,10 +2,12 @@ package com.intec.connect.repository
 
 import android.util.Log
 import com.intec.connect.api.RetrofitApiClient
+import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
+import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.data.model.Product
-import com.intec.connect.data.model.TokenModel
+import com.intec.connect.data.model.UnlikeRequest
 import javax.inject.Inject
 
 class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiClient) {
@@ -21,7 +23,7 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return TokenModel containing the access token.
      * @throws Exception If the login request fails.
      */
-    suspend fun loginUser(loginModel: LoginModel): TokenModel {
+    suspend fun loginUser(loginModel: LoginModel): AuthResponse {
         val response = userAPI.login(loginModel)
 
         Log.d(TAG, "loginUser: $response")
@@ -72,4 +74,17 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
             throw Exception("Request failed: ${response.code()} - ${response.message()}")
         }
     }
+
+    suspend fun likeProduct(likeRequest: LikeRequest, token: String) {
+        userAPI.likeProduct(token, likeRequest)
+    }
+
+    suspend fun getLikedProducts(userId: String, token: String): List<Product> {
+        return userAPI.getLikedProducts(userId, token)
+    }
+
+    suspend fun unlikeProduct(unlikeRequest: UnlikeRequest, token: String) {
+        userAPI.unlikeProduct(token, unlikeRequest)
+    }
+
 }

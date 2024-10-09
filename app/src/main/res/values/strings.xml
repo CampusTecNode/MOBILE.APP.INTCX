@@ -19,7 +19,7 @@
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="inicio">Inicio</string>
-    <string name="me_gusta">Me gusta</string>
+    <string name="me_gusta">Favoritos</string>
     <string name="notificaciones">Notificacion</string>
     <string name="perfil">Perfil</string>
     <string name="accessing">Accediendo...</string>
@@ -43,6 +43,9 @@
     <string name="like">like</string>
     <string name="esta_categoria_no_tiene_productos_por_el_momento">Categria sin productos.</string>
     <string name="no_se_encontraron_productos_para_la_b_squeda">No se encontro ningun producto para la búsqueda: %1$s</string>
+    <string name="no_tienes_productos_como_favoritos">No tienes productos como favoritos.</string>
+    <string name="productos_favoritos">Productos Favoritos</string>
+
     <string name="notificacion">Notificacion</string>
     <string name="configuration">Configuraciones</string>
     <string name="faqs">Faqs</string>

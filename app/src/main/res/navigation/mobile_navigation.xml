@@ -18,9 +18,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.intec.connect.ui.dashboard.DashboardFragment"
+        android:name="com.intec.connect.ui.dashboard.LikesFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_likes">
     </fragment>
 
     <fragment
