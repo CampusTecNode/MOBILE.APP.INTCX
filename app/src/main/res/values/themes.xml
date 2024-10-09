@@ -118,5 +118,8 @@
     <style name="Product.Price" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/primary_color</item>
     </style>
+    <style name="ImageStyle_Circle">
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>
