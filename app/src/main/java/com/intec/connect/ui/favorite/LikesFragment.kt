@@ -154,9 +154,13 @@ class LikesFragment : Fragment() {
         if (isLoading) {
             binding.shimmerFrameLayoutLikeView.visibility = View.VISIBLE
             binding.shimmerFrameLayoutLikeView.startShimmer()
+            // Hide the content views while loading
+            binding.mainContainer.visibility = View.GONE // Add this line
         } else {
             binding.shimmerFrameLayoutLikeView.stopShimmer()
             binding.shimmerFrameLayoutLikeView.visibility = View.GONE
+            // Show the content views after loading
+            binding.mainContainer.visibility = View.VISIBLE // Add this line
         }
     }
 

@@ -1,8 +1,10 @@
 package com.intec.connect.ui.activities
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,8 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.intec.connect.R
 import com.intec.connect.databinding.ActivityBottomNavigationBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +30,18 @@ class BottomNavigationActivity : AppCompatActivity() {
         setupNavigation()
         setupKeyboardVisibilityListener()
         setupAddFabClickListener()
+        FirebaseApp.initializeApp(this)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
+
+            }
+
+            val token = task.result
+            Log.d(TAG, "FCM registration token: $token")
+        }
     }
 
     /**

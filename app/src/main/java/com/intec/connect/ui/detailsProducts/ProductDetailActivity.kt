@@ -84,7 +84,6 @@ class ProductDetailActivity : AppCompatActivity() {
                 result.onSuccess { product ->
                     binding.nameProduct.text = product.name
                     binding.brand.text = product.brand
-                    binding.productDescription.text = product.description
                     binding.productDetail.text = product.description
                     binding.stockText.text = product.stock.toString()
                     binding.colorText.text = product.color
@@ -130,8 +129,6 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.detailsProductShimmer.visibility = View.GONE
             binding.mainContainer.visibility = View.VISIBLE
             binding.shimmerContainer.visibility = View.GONE
-            animateViewEntrance()
-
         }
     }
 
