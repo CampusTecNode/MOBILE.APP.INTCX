@@ -38,8 +38,8 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return CategoriesProducts containing the retrieved categories and products.
      * @throws Exception If the request fails.
      */
-    suspend fun getCategoriesProducts(tokenModel: String): CategoriesProducts {
-        val response = userAPI.categoriesProduct(tokenModel)
+    suspend fun getCategoriesProducts(userID: String, tokenModel: String): CategoriesProducts {
+        val response = userAPI.categoriesProduct(userID, tokenModel)
 
         Log.d(TAG, "getCategoriesProducts: $response")
 
@@ -53,8 +53,16 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return List of Product containing the retrieved products.
      * @throws Exception If the request fails.
      */
-    suspend fun getProducts(tokenModel: String): List<Product> {
-        val response = userAPI.products(tokenModel)
+    suspend fun getProducts(userId: String, tokenModel: String): List<Product> {
+        val response = userAPI.products(userId, tokenModel)
+
+        Log.d(TAG, "getProducts: $response")
+
+        return handleResponse(response)
+    }
+
+    suspend fun getProductsDetail(productId: Int, tokenModel: String): Product {
+        val response = userAPI.productsDetail(productId, tokenModel)
 
         Log.d(TAG, "getProducts: $response")
 

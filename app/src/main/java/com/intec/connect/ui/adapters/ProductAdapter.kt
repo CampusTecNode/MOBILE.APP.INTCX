@@ -52,7 +52,9 @@ class ProductAdapter(
 
         holder.productName.text = product.name
         holder.productDescription.text = product.description
-        holder.productPrice.text = product.price.split(".")[0]
+        holder.productPrice.text = product.price
+
+        holder.updateFavoriteButtonAppearance(product.liked)
 
         if (product.imageURL.isNotEmpty()) {
             context?.let {
@@ -76,6 +78,10 @@ class ProductAdapter(
         this.products.clear()
         this.products.addAll(categoriesProducts)
         notifyDataSetChanged()
+    }
+
+    fun products(): MutableList<Product> {
+        return this.products
     }
 
 }

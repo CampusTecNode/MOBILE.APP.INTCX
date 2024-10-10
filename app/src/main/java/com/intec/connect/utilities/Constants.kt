@@ -5,4 +5,5 @@ object Constants {
     const val TOKEN_KEY = "auth_token"
     const val USERID_KEY = "user_id"
     const val SALT = "cGFzc3dvcmQtc2FsdC0xMjM0NTY3ODk="
+    const val PRODUCT_ID = "product_id"
 }

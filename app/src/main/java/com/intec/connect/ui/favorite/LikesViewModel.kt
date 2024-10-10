@@ -1,4 +1,4 @@
-package com.intec.connect.ui.dashboard
+package com.intec.connect.ui.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

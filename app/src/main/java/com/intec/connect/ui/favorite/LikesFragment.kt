@@ -1,13 +1,15 @@
-package com.intec.connect.ui.dashboard
+package com.intec.connect.ui.favorite
 
+import android.animation.AnimatorSet
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,8 +20,12 @@ import com.intec.connect.databinding.FragmentLikesBinding
 import com.intec.connect.interfaces.ClickListener
 import com.intec.connect.interfaces.LikeClickListener
 import com.intec.connect.ui.adapters.LikesAdapter
+import com.intec.connect.ui.detailsProducts.ProductDetailActivity
+import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
+import com.intec.connect.utilities.animations.ReboundAnimator
+import com.intec.connect.utilities.animations.ReboundAnimator.ReboundAnimatorType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,6 +58,7 @@ class LikesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
         setupProductsRecyclerView()
+        animateViewEntrance()
     }
 
     /**
@@ -85,7 +92,7 @@ class LikesFragment : Fragment() {
         binding.recyclerViewLikes.layoutManager = GridLayoutManager(context, 2)
         likesAdapter = LikesAdapter(object : ClickListener<Product> {
             override fun onClick(view: View, item: Product, position: Int) {
-                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
+                startProductDetailActivity(context, item)
             }
 
 
@@ -110,6 +117,20 @@ class LikesFragment : Fragment() {
                 checkEmptyState()
             }
         })
+    }
+
+    fun startProductDetailActivity(context: Context?, item: Product) {
+        val intent = Intent(context, ProductDetailActivity::class.java)
+        intent.putExtra(Constants.PRODUCT_ID, item.id)
+
+        val options = context?.let {
+            ActivityOptionsCompat.makeCustomAnimation(
+                it,
+                R.anim.activity_transition_from_bottom,
+                R.anim.activity_transition_stay_visible
+            )
+        }
+        context?.startActivity(intent, options?.toBundle())
     }
 
     private fun checkEmptyState() {
@@ -153,5 +174,33 @@ class LikesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Animates the entrance of various views when the fragment is displayed.
+     */
+    private fun animateViewEntrance() {
+        val viewsToAnimate = listOf(
+            binding.title
+        )
+
+        val reboundAnimator = ReboundAnimator(
+            requireActivity(),
+            reboundDirection = ReboundAnimatorType.RIGHT_TO_LEFT
+        )
+
+        val animatorDuration = 500
+        val startDelayBetweenViews = 100
+
+        reboundAnimator.getReboundAnimatorForViews(
+            animatorDuration,
+            startDelayBetweenViews,
+            *viewsToAnimate.toTypedArray()
+        ).let {
+            AnimatorSet().apply {
+                playTogether(*it)
+                start()
+            }
+        }
     }
 }

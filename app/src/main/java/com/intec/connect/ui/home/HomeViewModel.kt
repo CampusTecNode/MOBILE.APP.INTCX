@@ -26,13 +26,16 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
      * @param tokenModel The authentication token for the API request.
      * @return LiveData holding the [Result] of the operation.
      */
-    fun getCategoriesProducts(tokenModel: String): MutableLiveData<Result<CategoriesProducts>> {
+    fun getCategoriesProducts(
+        userID: String,
+        tokenModel: String
+    ): MutableLiveData<Result<CategoriesProducts>> {
         viewModelScope.launch {
             isLoading.postValue(true)
 
             try {
                 val categoriesProduct =
-                    repository.getCategoriesProducts(tokenModel)
+                    repository.getCategoriesProducts(userID, tokenModel)
 
                 if (!categoriesProduct.isEmpty()) {
                     _categoriesProducts.value = Result.success(categoriesProduct)
@@ -55,12 +58,12 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
      * @param tokenModel The authentication token for the API request.
      * @return LiveData holding the [Result] of the operation.
      */
-    fun getProducts(tokenModel: String): MutableLiveData<Result<List<Product>>> {
+    fun getProducts(userID: String, tokenModel: String): MutableLiveData<Result<List<Product>>> {
         viewModelScope.launch {
             isLoading.postValue(true)
 
             try {
-                val products = repository.getProducts(tokenModel)
+                val products = repository.getProducts(userID, tokenModel)
                 _products.value = Result.success(products)
             } catch (e: Exception) {
                 _products.value = Result.failure(e)
@@ -77,6 +80,8 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
             try {
                 val request = LikeRequest(userId, productId)
                 repository.likeProduct(request, token)
+
+                refreshProducts(userId, token)
             } catch (e: Exception) {
                 // Handle error
             }
@@ -88,10 +93,26 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
             try {
                 val request = UnlikeRequest(userId, productId)
                 repository.unlikeProduct(request, token)
+
+                refreshProducts(userId, token)
             } catch (e: Exception) {
                 // Handle error
             }
         }
     }
 
+    fun refreshProducts(userId: String, token: String) {
+        viewModelScope.launch {
+            try {
+                val categoriesProducts = repository.getCategoriesProducts(userId, token)
+                val products = repository.getProducts(userId, token)
+                _categoriesProducts.value = Result.success(categoriesProducts)
+                _products.value = Result.success(products)
+            } catch (e: Exception) {
+                _categoriesProducts.value = Result.failure(e)
+                _products.value = Result.failure(e)
+            } finally {
+            }
+        }
+    }
 }

@@ -44,6 +44,12 @@
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Base.Theme.IntecConnect.Fragments.view" />
+
+        <activity
+            android:name=".ui.detailsProducts.ProductDetailActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Base.Theme.IntecConnect.Products.Details" />
     </application>
 
 </manifest>

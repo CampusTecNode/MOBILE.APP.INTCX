@@ -12,16 +12,29 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RetrofitApiClient {
     @POST("auth/login")
     suspend fun login(@Body loginModel: LoginModel): Response<AuthResponse>
 
-    @GET("categories/")
-    suspend fun categoriesProduct(@Header("Authorization") authHeader: String): Response<CategoriesProducts>
+    @GET("/categories/")
+    suspend fun categoriesProduct(
+        @Query("userID") userId: String,
+        @Header("Authorization") authHeader: String
+    ): Response<CategoriesProducts>
 
     @GET("products/")
-    suspend fun products(@Header("Authorization") authHeader: String): Response<List<Product>>
+    suspend fun products(
+        @Query("userID") userId: String,
+        @Header("Authorization") authHeader: String
+    ): Response<List<Product>>
+
+    @GET("products/{id}/")
+    suspend fun productsDetail(
+        @Path("id") productId: Int,
+        @Header("Authorization") authHeader: String
+    ): Response<Product>
 
     @POST("likes/like")
     suspend fun likeProduct(@Header("Authorization") token: String, @Body likeRequest: LikeRequest)

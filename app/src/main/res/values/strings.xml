@@ -40,6 +40,7 @@
     <string name="category_name">category name</string>
     <string name="categories">Categorias de productos</string>
     <string name="_100_00">100.00</string>
+    <string name="presentation_money">RD$ 100.00</string>
     <string name="like">like</string>
     <string name="esta_categoria_no_tiene_productos_por_el_momento">Categria sin productos.</string>
     <string name="no_se_encontraron_productos_para_la_b_squeda">No se encontro ningun producto para la búsqueda: %1$s</string>
@@ -50,4 +51,15 @@
     <string name="configuration">Configuraciones</string>
     <string name="faqs">Faqs</string>
     <string name="logout">Salir</string>
+    <string name="button_back">button_back</string>
+    <string name="name_product">Name Product</string>
+    <string name="las_laptops_mac_o_macbooks_son_computadoras_port_tiles_dise_adas_por_apple_son_conocidas_por_su_dise_o_elegante_sistema_operativo_macos_rendimiento_fluido_y_enfoque_en_la_simplicidad">Las laptops Mac, o MacBooks, son computadoras portátiles diseñadas por Apple. Son conocidas por su diseño elegante, sistema operativo macOS, rendimiento fluido y enfoque en la simplicidad.</string>
+    <string name="laptop_mac">Laptop Mac</string>
+    <string name="descriocion_del_producto">Descripcion</string>
+    <string name="brand_product">brand product</string>
+    <string name="characteristics">Caracteristicas</string>
+    <string name="dimenciones">Dimenciones:</string>
+    <string name="size">Tamaño:</string>
+    <string name="dec">dec</string>
+    <string name="detalle_de_producto">Detalle de producto</string>
 </resources>

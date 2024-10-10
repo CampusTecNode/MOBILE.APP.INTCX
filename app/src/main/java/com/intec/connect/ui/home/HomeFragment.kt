@@ -2,6 +2,8 @@ package com.intec.connect.ui.home
 
 import android.animation.AnimatorSet
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
@@ -16,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +33,8 @@ import com.intec.connect.ui.activities.BottomNavigationActivity
 import com.intec.connect.ui.adapters.CategoriesAdapter
 import com.intec.connect.ui.adapters.CategoriesProductAdapter
 import com.intec.connect.ui.adapters.ProductAdapter
+import com.intec.connect.ui.detailsProducts.ProductDetailActivity
+import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.animations.ReboundAnimator
@@ -54,6 +59,9 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     private lateinit var categoriesProductAdapter: CategoriesProductAdapter
     private lateinit var productAdapter: ProductAdapter
     private val likedProducts = mutableSetOf<Int>()
+    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var userId: String
+    private lateinit var token: String
 
     /**
      * Inflates the fragment's view and returns the root view.
@@ -70,6 +78,11 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
 
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        userId = sharedPrefs.getString(USERID_KEY, "")!!
+        token = sharedPrefs.getString(TOKEN_KEY, "")!!
+
         return binding.root
     }
 
@@ -95,22 +108,22 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * categories, and products.
      */
     private fun setupObservers() {
-        val sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val token = sharedPrefs.getString(TOKEN_KEY, null)
+
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
         }
 
-        token?.let {
-            homeViewModel.getCategoriesProducts(it).observe(viewLifecycleOwner) { result ->
-                handleCategoriesProductsResult(result)
+        userId.let {
+            token.let {
+                homeViewModel.getCategoriesProducts(userId, token)
+                    .observe(viewLifecycleOwner) { result ->
+                        handleCategoriesProductsResult(result)
+                    }
+                homeViewModel.getProducts(userId, token).observe(viewLifecycleOwner) { result ->
+                    handleProductsResult(result)
+                }
             }
-            homeViewModel.getProducts(it).observe(viewLifecycleOwner) { result ->
-                handleProductsResult(result)
-            }
-        } ?: run {
-            requireActivity().finish()
         }
     }
 
@@ -197,45 +210,43 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * Sets up the RecyclerView for category-specific products and assigns the adapter.
      */
     private fun setupCategoriesProductsRecyclerView() {
-        val sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val token = sharedPrefs.getString(TOKEN_KEY, "")
-        val userId = sharedPrefs.getString(USERID_KEY, "")
-
         binding.recyclerViewProducts.setHasFixedSize(true)
         binding.recyclerViewProducts.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         categoriesProductAdapter = CategoriesProductAdapter(object : ClickListener<Product> {
             override fun onClick(view: View, item: Product, position: Int) {
-                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
+                startProductDetailActivity(context, item)
             }
         }, object : LikeClickListener {
             override fun onLike(product: Product, position: Int) {
-                if (likedProducts.contains(product.id)) {
-                    Toast.makeText(context, "Product already liked", Toast.LENGTH_SHORT).show()
-                    return
-                }
 
-                likedProducts.add(product.id)
-
-                if (token != null && userId != null) {
-                    homeViewModel.likeProduct(userId, product.id.toString(), token)
-                } else {
-                    // Handle the case where token or userId is null (e.g., user not logged in)
-                }
+                homeViewModel.likeProduct(userId, product.id.toString(), token)
+                homeViewModel.refreshProducts(userId, token)
             }
 
             override fun onUnlike(product: Product, position: Int) {
-                if (token != null && userId != null) {
-                    homeViewModel.unlikeProduct(userId, product.id.toString(), token)
-                } else {
-                    // Handle the case where token or userId is null (e.g., user not logged in)
-                }
 
-                likedProducts.remove(product.id)
+                homeViewModel.unlikeProduct(userId, product.id.toString(), token)
+                homeViewModel.refreshProducts(userId, token)
             }
 
         }, requireActivity(), binding.recyclerViewProducts)
         binding.recyclerViewProducts.adapter = categoriesProductAdapter
+
+    }
+
+    fun startProductDetailActivity(context: Context?, item: Product) {
+        val intent = Intent(context, ProductDetailActivity::class.java)
+        intent.putExtra(Constants.PRODUCT_ID, item.id)
+
+        val options = context?.let {
+            ActivityOptionsCompat.makeCustomAnimation(
+                it,
+                R.anim.activity_transition_from_bottom,
+                R.anim.activity_transition_stay_visible
+            )
+        }
+        context?.startActivity(intent, options?.toBundle())
     }
 
     /**
@@ -247,42 +258,19 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         productAdapter = ProductAdapter(object : ClickListener<Product> {
             override fun onClick(view: View, item: Product, position: Int) {
-                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
+                startProductDetailActivity(context, item)
             }
         }, object : LikeClickListener {
             override fun onLike(product: Product, position: Int) {
 
-                if (likedProducts.contains(product.id)) {
-                    Toast.makeText(context, "Product already liked", Toast.LENGTH_SHORT).show()
-                    return
-                }
-
                 likedProducts.add(product.id)
-                val sharedPrefs =
-                    requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                val token = sharedPrefs.getString(TOKEN_KEY, "")
-                val userId = sharedPrefs.getString(USERID_KEY, "")
-
-                if (token != null && userId != null) {
-                    homeViewModel.likeProduct(userId, product.id.toString(), token)
-                } else {
-                    // Handle the case where token or userId is null (e.g., user not logged in)
-                }
+                homeViewModel.likeProduct(userId, product.id.toString(), token)
 
             }
 
             override fun onUnlike(product: Product, position: Int) {
-                val sharedPrefs =
-                    requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                val token = sharedPrefs.getString(TOKEN_KEY, "")
-                val userId = sharedPrefs.getString(USERID_KEY, "")
 
-                if (token != null && userId != null) {
-                    homeViewModel.unlikeProduct(userId, product.id.toString(), token)
-                } else {
-                    // Handle the case where token or userId is null (e.g., user not logged in)
-                }
-
+                homeViewModel.unlikeProduct(userId, product.id.toString(), token)
                 likedProducts.remove(product.id)
             }
 
@@ -412,4 +400,5 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         _binding = null
         super.onDestroyView()
     }
+
 }
