@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.androidx.room.common)
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

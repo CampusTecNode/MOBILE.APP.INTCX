@@ -63,4 +63,6 @@
     <string name="dec">dec</string>
     <string name="detalle_de_producto">Detalle de producto</string>
     <string name="default_notification_channel_id">0</string>
+    <string name="listado_de_productos">Catalogo de productos</string>
+    <string name="el_producto_que_busca_no_se_encuentra_en_inventario">El producto no se encuentra en inventario</string>
 </resources>
