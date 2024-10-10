@@ -485,7 +485,6 @@
                         android:textSize="24sp" />
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/textViewCount"
                     android:layout_width="match_parent"
@@ -493,10 +492,11 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
+                    android:layout_margin="1dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:text="1"
+                    android:text="15"
                     android:textColor="@color/primary_color"
                     android:textSize="18sp" />
 

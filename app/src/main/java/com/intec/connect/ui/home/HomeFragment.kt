@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.intec.connect.R
@@ -51,7 +52,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityListener {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentHomeBinding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -62,6 +63,7 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var userId: String
     private lateinit var token: String
+    private lateinit var keyboardVisibilityListener: BottomNavigationActivity.KeyboardVisibilityListener
 
     /**
      * Inflates the fragment's view and returns the root view.
@@ -82,6 +84,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userId = sharedPrefs.getString(USERID_KEY, "")!!
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
+        keyboardVisibilityListener = this // Or create the listener object here
+        (requireActivity() as? BottomNavigationActivity)?.addKeyboardVisibilityListener(
+            keyboardVisibilityListener
+        ) // Add the listener
 
         return binding.root
     }
@@ -276,6 +282,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
 
         }, requireActivity(), binding.recyclerViewAllProducts)
         binding.recyclerViewAllProducts.adapter = productAdapter
+
+        binding.textViewNewProductsVewMore.setOnClickListener {
+            findNavController().navigate(R.id.allProductsFragment)
+        }
     }
 
     /**
@@ -384,19 +394,24 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * @param isVisible Boolean indicating whether the keyboard is visible or not.
      */
     override fun onKeyboardVisibilityChanged(isVisible: Boolean) {
-        val params = binding.scrollView.layoutParams as ViewGroup.MarginLayoutParams
-        params.bottomMargin = if (isVisible) {
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        } else {
-            resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom)
+        _binding?.let { binding -> // Add null check
+            val params = binding.scrollView.layoutParams as ViewGroup.MarginLayoutParams
+            params.bottomMargin = if (isVisible) {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            } else {
+                resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom)
+            }
+            binding.scrollView.layoutParams = params
         }
-        binding.scrollView.layoutParams = params
     }
 
     /**
      * Cleans up the view binding when the fragment is destroyed.
      */
     override fun onDestroyView() {
+        (requireActivity() as? BottomNavigationActivity)?.removeKeyboardVisibilityListener(
+            keyboardVisibilityListener
+        )
         _binding = null
         super.onDestroyView()
     }

@@ -23,6 +23,8 @@ class BottomNavigationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBottomNavigationBinding
     private var keyboardVisibilityListener: KeyboardVisibilityListener? = null
+    private var keyboardVisibilityListeners =
+        mutableListOf<KeyboardVisibilityListener>() // Add this line
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,6 +127,14 @@ class BottomNavigationActivity : AppCompatActivity() {
             binding.bottomAppBar.visibility = View.GONE
         }
         keyboardVisibilityListener?.onKeyboardVisibilityChanged(!isVisible)
+    }
+
+    fun addKeyboardVisibilityListener(listener: KeyboardVisibilityListener) {
+        keyboardVisibilityListeners.add(listener)
+    }
+
+    fun removeKeyboardVisibilityListener(listener: KeyboardVisibilityListener) {
+        keyboardVisibilityListeners.remove(listener)
     }
 
     /**

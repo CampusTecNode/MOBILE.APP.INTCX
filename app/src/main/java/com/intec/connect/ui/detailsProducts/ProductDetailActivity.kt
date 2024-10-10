@@ -27,6 +27,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var userId: String
     private lateinit var token: String
     private var productId: Int = 0
+    private var originalPrice = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupObservers()
+        setupCounter()
 
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -59,6 +61,25 @@ class ProductDetailActivity : AppCompatActivity() {
 
         binding.backArrow.setOnClickListener {
             finishWithAnimation()
+        }
+    }
+
+    private fun setupCounter() {
+        var count = 1
+        binding.textViewCount.text = count.toString()
+
+        binding.buttonMinus.setOnClickListener {
+            if (count > 1) {
+                count--
+                binding.textViewCount.text = count.toString()
+                updateTotalPrice(count)
+            }
+        }
+
+        binding.buttonPlus.setOnClickListener {
+            count++
+            binding.textViewCount.text = count.toString()
+            updateTotalPrice(count)
         }
     }
 
@@ -93,6 +114,11 @@ class ProductDetailActivity : AppCompatActivity() {
                     binding.productPriceText.text = product.price
 
                     updateFavoriteButtonAppearance(product.liked)
+
+
+                    binding.productPriceText.text = product.price
+                    originalPrice = product.price.toDoubleOrNull() ?: 0.0
+                    updateTotalPrice(1)
                 }.onFailure { error ->
                     Log.e(
                         "ProductDetailActivity",
@@ -103,6 +129,12 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun updateTotalPrice(count: Int) {
+        val totalPrice = originalPrice * count
+        binding.productPriceText.text = totalPrice.toString()
+    }
+
 
     private fun updateFavoriteButtonAppearance(isLiked: Boolean) {
         if (isLiked) {
@@ -172,7 +204,6 @@ class ProductDetailActivity : AppCompatActivity() {
             start()
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
