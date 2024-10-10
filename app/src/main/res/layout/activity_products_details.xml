@@ -122,7 +122,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/like"
                 android:scaleType="centerCrop"
-                android:src="@drawable/favorite_24dp_fill_red"
+                android:src="@drawable/favorite_24dp_fill"
                 app:layout_constraintBottom_toBottomOf="@id/name_product"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/name_product" />
@@ -370,11 +370,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/product_price_container_main"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout6"
-                app:layout_constraintEnd_toStartOf="@id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout6">
 
@@ -397,9 +396,8 @@
                 <TextView
                     android:id="@+id/product_price_text"
                     style="@style/Product.Name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
+                    android:layout_width="56dp"
+                    android:layout_height="34dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_horizontal"
                     android:text="@string/_100_00"
@@ -420,8 +418,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:backgroundTint="@color/primary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/linearLayout2">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/text_cart"
@@ -451,12 +448,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginEnd="35dp"
                 android:background="@drawable/rounded_background_item_count"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -464,7 +460,6 @@
                 android:weightSum="3"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout6"
                 app:layout_constraintEnd_toStartOf="@+id/constraintLayout6"
-                app:layout_constraintStart_toEndOf="@id/product_price_container_main"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout6">
 
                 <LinearLayout
@@ -489,10 +484,10 @@
                     android:id="@+id/textViewCount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="1dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:layout_margin="1dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:includeFontPadding="false"

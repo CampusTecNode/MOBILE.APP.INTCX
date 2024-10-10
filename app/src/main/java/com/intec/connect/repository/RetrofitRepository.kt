@@ -61,8 +61,8 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
         return handleResponse(response)
     }
 
-    suspend fun getProductsDetail(productId: Int, tokenModel: String): Product {
-        val response = userAPI.productsDetail(productId, tokenModel)
+    suspend fun getProductsDetail(productId: Int, userId: String, tokenModel: String): Product {
+        val response = userAPI.productsDetail(productId, userId, tokenModel)
 
         Log.d(TAG, "getProducts: $response")
 

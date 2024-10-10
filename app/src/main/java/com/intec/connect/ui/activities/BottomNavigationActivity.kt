@@ -121,12 +121,20 @@ class BottomNavigationActivity : AppCompatActivity() {
     private fun toggleUIVisibility(isVisible: Boolean) {
         if (isVisible) {
             binding.addFab.show()
-            binding.bottomAppBar.visibility = View.VISIBLE
+            val params = binding.bottomAppBar.layoutParams
+            params.height =
+                resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom_inverse)
+            binding.bottomAppBar.layoutParams = params
         } else {
             binding.addFab.hide()
-            binding.bottomAppBar.visibility = View.GONE
+            val params = binding.bottomAppBar.layoutParams
+            params.height = 1
+            binding.bottomAppBar.layoutParams = params
         }
-        keyboardVisibilityListener?.onKeyboardVisibilityChanged(!isVisible)
+
+        for (listener in keyboardVisibilityListeners) {
+            listener.onKeyboardVisibilityChanged(!isVisible)
+        }
     }
 
     fun addKeyboardVisibilityListener(listener: KeyboardVisibilityListener) {

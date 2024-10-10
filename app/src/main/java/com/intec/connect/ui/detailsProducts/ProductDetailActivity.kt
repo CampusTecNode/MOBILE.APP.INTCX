@@ -15,6 +15,7 @@ import com.intec.connect.R
 import com.intec.connect.databinding.ActivityProductsDetailsBinding
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
+import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.animations.ReboundAnimator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +38,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
+        userId = sharedPrefs.getString(USERID_KEY, "")!!
 
         setContentView(binding.root)
 
@@ -100,32 +102,35 @@ class ProductDetailActivity : AppCompatActivity() {
             showLoading(isLoading)
         }
 
-        token.let { it1 ->
-            productsDetailViewModel.getProductsDetail(productId, it1).observe(this) { result ->
-                result.onSuccess { product ->
-                    binding.nameProduct.text = product.name
-                    binding.brand.text = product.brand
-                    binding.productDetail.text = product.description
-                    binding.stockText.text = product.stock.toString()
-                    binding.colorText.text = product.color
-                    binding.weightText.text = product.weight.toString()
-                    binding.sizeText.text = product.size
-                    binding.skuText.text = product.sku
-                    binding.productPriceText.text = product.price
+        userId.let {
+            token.let {
+                productsDetailViewModel.getProductsDetail(productId, userId, token)
+                    .observe(this) { result ->
+                        result.onSuccess { product ->
+                            binding.nameProduct.text = product.name
+                            binding.brand.text = product.brand
+                            binding.productDetail.text = product.description
+                            binding.stockText.text = product.stock.toString()
+                            binding.colorText.text = product.color
+                            binding.weightText.text = product.weight.toString()
+                            binding.sizeText.text = product.size
+                            binding.skuText.text = product.sku
+                            binding.productPriceText.text = product.price
 
-                    updateFavoriteButtonAppearance(product.liked)
+                            updateFavoriteButtonAppearance(product.liked)
 
+                            binding.productPriceText.text = product.price
+                            originalPrice = product.price.toDoubleOrNull() ?: 0.0
+                            updateTotalPrice(1)
 
-                    binding.productPriceText.text = product.price
-                    originalPrice = product.price.toDoubleOrNull() ?: 0.0
-                    updateTotalPrice(1)
-                }.onFailure { error ->
-                    Log.e(
-                        "ProductDetailActivity",
-                        "Error al obtener los detalles del producto",
-                        error
-                    )
-                }
+                        }.onFailure { error ->
+                            Log.e(
+                                "ProductDetailActivity",
+                                "Error al obtener los detalles del producto",
+                                error
+                            )
+                        }
+                    }
             }
         }
     }
@@ -135,7 +140,6 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.productPriceText.text = totalPrice.toString()
     }
 
-
     private fun updateFavoriteButtonAppearance(isLiked: Boolean) {
         if (isLiked) {
             binding.favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
@@ -143,7 +147,6 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.favoriteButton.setImageResource(R.drawable.favorite_24dp_fill)
         }
     }
-
 
     /**
      * Displays or hides the loading animation based on the loading state.
@@ -207,6 +210,6 @@ class ProductDetailActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        productsDetailViewModel.getProductsDetail(-1, "").removeObservers(this)
+        productsDetailViewModel.getProductsDetail(-1, "", "").removeObservers(this)
     }
 }

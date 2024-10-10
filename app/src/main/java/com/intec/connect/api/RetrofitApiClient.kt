@@ -30,9 +30,10 @@ interface RetrofitApiClient {
         @Header("Authorization") authHeader: String
     ): Response<List<Product>>
 
-    @GET("products/{id}/")
+    @GET("/products/{id}/")
     suspend fun productsDetail(
         @Path("id") productId: Int,
+        @Query("userID") userId: String,
         @Header("Authorization") authHeader: String
     ): Response<Product>
 
