@@ -17,13 +17,12 @@ import com.intec.connect.interfaces.LikeClickListener
  * @param itemView The view representing a single item in the RecyclerView.
  * @param listener The click listener interface to handle click events on products.
  */
-class CategoryProductViewHolder(
+class LikesViewHolder(
     itemView: View,
     listener: ClickListener<Product>,
     private val likeClickListener: LikeClickListener
 
 ) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-    var isLiked = false
 
     var item: Product? = null
 
@@ -38,16 +37,8 @@ class CategoryProductViewHolder(
     init {
         itemView.setOnClickListener(this)
         favoriteButton.setOnClickListener {
-            item?.let {
-                it.liked = !it.liked
-                isLiked = it.liked
-            }
-
-            updateFavoriteButtonAppearance(isLiked)
-
             val product = item ?: return@setOnClickListener
-
-            if (product.liked) {
+            if (product.liked == true) {
                 likeClickListener.onLike(product, adapterPosition)
             } else {
                 likeClickListener.onUnlike(product, adapterPosition)
@@ -56,10 +47,8 @@ class CategoryProductViewHolder(
     }
 
     fun updateFavoriteButtonAppearance(isLiked: Boolean) {
-        if (isLiked) {
+        if (!isLiked) {
             favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
-        } else {
-            favoriteButton.setImageResource(R.drawable.favorite_24dp_fill)
         }
     }
 

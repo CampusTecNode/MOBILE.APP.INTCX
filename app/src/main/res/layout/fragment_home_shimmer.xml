@@ -86,33 +86,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmerFrameLayout_product_shimmer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toStartOf="@+id/shimmerFrameLayout_product_second_shimmer"
-                        app:layout_constraintStart_toStartOf="@+id/textView_shimmer"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2_shimmer">
-
-                        <include layout="@layout/products_item_loading" />
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                    <include layout="@layout/products_item_loading" />
 
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmerFrameLayout_product_second_shimmer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="@+id/textView2_shimmer"
-                        app:layout_constraintEnd_toStartOf="@+id/shimmerFrameLayout_product_second_shimmer"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2_shimmer"
-                        tools:ignore="NotSibling">
+                    <include layout="@layout/products_item_loading" />
 
-                        <include layout="@layout/products_item_loading" />
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
                 </LinearLayout>
 
                 <include
@@ -165,33 +143,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmerFrameLayout_all_product_shimmer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toStartOf="@+id/shimmerFrameLayout_product_second_shimmer"
-                        app:layout_constraintStart_toStartOf="@+id/textView_shimmer"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2_shimmer">
 
-                        <include layout="@layout/products_item_loading" />
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                    <include layout="@layout/products_item_loading" />
 
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmerFrameLayout_all_product_second_shimmer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="@+id/textView2_shimmer"
-                        app:layout_constraintEnd_toStartOf="@+id/shimmerFrameLayout_product_second_shimmer"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2_shimmer"
-                        tools:ignore="NotSibling">
+                    <include layout="@layout/products_item_loading" />
 
-                        <include layout="@layout/products_item_loading" />
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
                 </LinearLayout>
 
                 <include

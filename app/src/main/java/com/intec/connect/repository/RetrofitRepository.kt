@@ -2,10 +2,12 @@ package com.intec.connect.repository
 
 import android.util.Log
 import com.intec.connect.api.RetrofitApiClient
+import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
+import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.data.model.Product
-import com.intec.connect.data.model.TokenModel
+import com.intec.connect.data.model.UnlikeRequest
 import javax.inject.Inject
 
 class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiClient) {
@@ -21,7 +23,7 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return TokenModel containing the access token.
      * @throws Exception If the login request fails.
      */
-    suspend fun loginUser(loginModel: LoginModel): TokenModel {
+    suspend fun loginUser(loginModel: LoginModel): AuthResponse {
         val response = userAPI.login(loginModel)
 
         Log.d(TAG, "loginUser: $response")
@@ -36,8 +38,8 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return CategoriesProducts containing the retrieved categories and products.
      * @throws Exception If the request fails.
      */
-    suspend fun getCategoriesProducts(tokenModel: String): CategoriesProducts {
-        val response = userAPI.categoriesProduct(tokenModel)
+    suspend fun getCategoriesProducts(userID: String, tokenModel: String): CategoriesProducts {
+        val response = userAPI.categoriesProduct(userID, tokenModel)
 
         Log.d(TAG, "getCategoriesProducts: $response")
 
@@ -51,8 +53,16 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
      * @return List of Product containing the retrieved products.
      * @throws Exception If the request fails.
      */
-    suspend fun getProducts(tokenModel: String): List<Product> {
-        val response = userAPI.products(tokenModel)
+    suspend fun getProducts(userId: String, tokenModel: String): List<Product> {
+        val response = userAPI.products(userId, tokenModel)
+
+        Log.d(TAG, "getProducts: $response")
+
+        return handleResponse(response)
+    }
+
+    suspend fun getProductsDetail(productId: Int, tokenModel: String): Product {
+        val response = userAPI.productsDetail(productId, tokenModel)
 
         Log.d(TAG, "getProducts: $response")
 
@@ -72,4 +82,17 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
             throw Exception("Request failed: ${response.code()} - ${response.message()}")
         }
     }
+
+    suspend fun likeProduct(likeRequest: LikeRequest, token: String) {
+        userAPI.likeProduct(token, likeRequest)
+    }
+
+    suspend fun getLikedProducts(userId: String, token: String): List<Product> {
+        return userAPI.getLikedProducts(userId, token)
+    }
+
+    suspend fun unlikeProduct(unlikeRequest: UnlikeRequest, token: String) {
+        userAPI.unlikeProduct(token, unlikeRequest)
+    }
+
 }

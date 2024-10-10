@@ -11,34 +11,33 @@ import com.intec.connect.R
 import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
 import com.intec.connect.interfaces.LikeClickListener
-import com.intec.connect.ui.holders.CategoryProductViewHolder
+import com.intec.connect.ui.holders.LikesViewHolder
 import com.intec.connect.utilities.animations.ListViewAnimatorHelper
 import com.intec.connect.utilities.animations.ReboundAnimator
 
-class ProductAdapter(
+class LikesAdapter(
     private val clickListener: ClickListener<Product>,
     private val likeClickListener: LikeClickListener,
     private val context: Activity?,
     private val recyclerView: RecyclerView,
-) : RecyclerView.Adapter<CategoryProductViewHolder>() {
+) : RecyclerView.Adapter<LikesViewHolder>() {
     private var animatorViewHelper: ListViewAnimatorHelper? = null
     private var reboundAnimatorManager: ReboundAnimator? = null
+    private val productLikedItems = mutableListOf<Product>()
 
-    private val products = mutableListOf<Product>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikesViewHolder {
         val layout =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_adapter_item, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.like_product_adapter_item, parent, false)
         animatorViewHelper = context?.let {
             ListViewAnimatorHelper(
-                it,
-                recyclerView.layoutManager as LinearLayoutManager
+                it, recyclerView.layoutManager as LinearLayoutManager
             )
         }
         reboundAnimatorManager =
             context?.let { ReboundAnimator(it, ReboundAnimator.ReboundAnimatorType.RIGHT_TO_LEFT) }
 
-        return CategoryProductViewHolder(
+        return LikesViewHolder(
             itemView = layout,
             listener = clickListener,
             likeClickListener = likeClickListener
@@ -46,8 +45,8 @@ class ProductAdapter(
 
     }
 
-    override fun onBindViewHolder(holder: CategoryProductViewHolder, position: Int) {
-        val product = products[position]
+    override fun onBindViewHolder(holder: LikesViewHolder, position: Int) {
+        val product = productLikedItems[position]
         holder.item = product
 
         holder.productName.text = product.name
@@ -72,16 +71,18 @@ class ProductAdapter(
         animatorViewHelper!!.animateViewIfNecessary(position, holder.itemView, animators)
     }
 
-    override fun getItemCount(): Int = products.size
+    override fun getItemCount(): Int = productLikedItems.size
 
-    fun updateProducts(categoriesProducts: List<Product>) {
-        this.products.clear()
-        this.products.addAll(categoriesProducts)
+    fun updateLikedProducts(products: List<Product>) {
+        this.productLikedItems.clear()
+        this.productLikedItems.addAll(products)
         notifyDataSetChanged()
     }
 
-    fun products(): MutableList<Product> {
-        return this.products
+    fun removeItem(position: Int) {
+        if (position in 0 until productLikedItems.size) {
+            productLikedItems.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
-
 }
