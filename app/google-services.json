@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42556247189",
+    "project_id": "intecx-6785f",
+    "storage_bucket": "intecx-6785f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42556247189:android:212717ac32a0bb25fe1f9c",
+        "android_client_info": {
+          "package_name": "com.intec.connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXQC6brlrPNzw55hEQZqpKbUdw2JQyVhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
