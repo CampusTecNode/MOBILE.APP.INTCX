@@ -85,7 +85,11 @@ class CategoriesProductAdapter(
 
         holder.productName.text = product.name
         holder.productDescription.text = product.description
-        holder.productPrice.text = product.price.split(".")[0]
+        holder.productPrice.text = product.price
+
+        holder.isLiked = product.liked
+        holder.updateFavoriteButtonAppearance(product.liked)
+
         if (product.imageURL.isNotEmpty()) {
             context?.let {
                 Glide.with(it)

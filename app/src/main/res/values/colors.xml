@@ -33,6 +33,7 @@
 
 
     <color name="text_description">#C2C0C0</color>
+    <color name="text_description_details">#868686</color>
 
 
 </resources>

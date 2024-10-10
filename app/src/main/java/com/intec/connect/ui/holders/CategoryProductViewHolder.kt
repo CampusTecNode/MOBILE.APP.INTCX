@@ -23,7 +23,7 @@ class CategoryProductViewHolder(
     private val likeClickListener: LikeClickListener
 
 ) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-    private var isLiked = false
+    var isLiked = false
 
     var item: Product? = null
 
@@ -38,12 +38,16 @@ class CategoryProductViewHolder(
     init {
         itemView.setOnClickListener(this)
         favoriteButton.setOnClickListener {
-            isLiked = !isLiked
-            updateFavoriteButtonAppearance()
+            item?.let {
+                it.liked = !it.liked
+                isLiked = it.liked
+            }
+
+            updateFavoriteButtonAppearance(isLiked)
 
             val product = item ?: return@setOnClickListener
 
-            if (isLiked) {
+            if (product.liked) {
                 likeClickListener.onLike(product, adapterPosition)
             } else {
                 likeClickListener.onUnlike(product, adapterPosition)
@@ -51,7 +55,7 @@ class CategoryProductViewHolder(
         }
     }
 
-    private fun updateFavoriteButtonAppearance() {
+    fun updateFavoriteButtonAppearance(isLiked: Boolean) {
         if (isLiked) {
             favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
         } else {
