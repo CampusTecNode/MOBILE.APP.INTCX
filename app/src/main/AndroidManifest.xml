@@ -17,9 +17,12 @@
         android:theme="@style/Theme.IntecConnect"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.Forgotpassword"
-            android:theme="@style/Base.Theme.IntecConnect"
+            android:name=".ui.activities.booking"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.Forgotpassword"
+            android:exported="false"
+            android:theme="@style/Base.Theme.IntecConnect" />
 
         <service
             android:name=".notification.MyFirebaseMessagingService"
@@ -34,7 +37,6 @@
             android:exported="true"
             android:label="@string/title_activity_bottom_navigation"
             android:theme="@style/Base.Theme.IntecConnect.Fragments.view" />
-
         <activity
             android:name=".ui.activities.SplashScreen"
             android:exported="true"
@@ -50,13 +52,11 @@
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Base.Theme.IntecConnect.LoginActivity" />
-
         <activity
             android:name=".ui.activities.BagActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Base.Theme.IntecConnect.Fragments.view" />
-
         <activity
             android:name=".ui.detailsProducts.ProductDetailActivity"
             android:exported="true"
