@@ -65,4 +65,11 @@
     <string name="default_notification_channel_id">0</string>
     <string name="listado_de_productos">Catalogo de productos</string>
     <string name="el_producto_que_busca_no_se_encuentra_en_inventario">El producto no se encuentra en inventario</string>
+    <string name="Email">Correo electrónico</string>
+    <string name="Forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="Reset_password">Restablecer contraseña</string>
+    <string name="Back_to_log_in">Volver a iniciar sesión</string>
+    <string name="No_worries">No te preocupes, te enviaremos las instrucciones para restablecerla.</string>
+    <string name="Enter_your_email">Ingrese su correo electrónico</string>
+    <string name="Sent_email">Enviar correo</string>
 </resources>
