@@ -11,25 +11,26 @@
         android:id="@+id/productImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/notification_icon_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/notification_icon_selector" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Título de la notificación -->
     <TextView
         android:id="@+id/productTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="We Have New Products With Offers"
-        android:textSize="16sp"
-        android:textColor="#000"
         android:maxLines="1"
-        app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintEnd_toStartOf="@+id/timeText"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="We Have New Products With Offers"
+        android:textColor="?android:attr/textColor"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+    app:layout_constraintEnd_toStartOf="@+id/timeText"
+    app:layout_constraintStart_toEndOf="@+id/productImage"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Tiempo transcurrido -->
     <TextView
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="6 min ago"
         android:textSize="14sp"
-        android:textColor="#888"
+        android:textColor="?android:attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,23 +48,12 @@
         android:id="@+id/productPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$364.95"
+        android:textColor="?android:attr/textColor"
         android:textSize="14sp"
-        android:textColor="#000"
-        app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintTop_toBottomOf="@id/productTitle" />
-
-    <!-- Precio con descuento -->
-    <TextView
-        android:id="@+id/productDiscountPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$260.00"
-        android:textSize="14sp"
-        android:textColor="#888"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@id/productPrice"
-        app:layout_constraintTop_toBottomOf="@id/productTitle" />
+    app:layout_constraintStart_toEndOf="@+id/productImage"
+    app:layout_constraintTop_toBottomOf="@id/productTitle" />
 
     <!-- Punto de notificación -->
     <View
