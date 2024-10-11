@@ -24,8 +24,9 @@ class NotificationAdapter(
     private val notifications = mutableListOf<NotificationItem>()
 
     class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.notificationTitleTextView)
-        val bodyTextView: TextView = itemView.findViewById(R.id.notificationBodyTextView)
+        val titleTextView: TextView = itemView.findViewById(R.id.productTitle)
+        val bodyTextView: TextView = itemView.findViewById(R.id.productPrice)
+        val timeTextView: TextView = itemView.findViewById(R.id.timeText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
@@ -52,6 +53,7 @@ class NotificationAdapter(
         val notification = notifications[position]
         holder.titleTextView.text = notification.title
         holder.bodyTextView.text = notification.body
+        holder.timeTextView.text = notification.timestamp.toString()
 
         val animators: Array<Animator> =
             reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView.rootView)
