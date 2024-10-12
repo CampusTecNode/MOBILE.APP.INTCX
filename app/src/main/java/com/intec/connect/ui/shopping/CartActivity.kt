@@ -46,12 +46,12 @@ class CartActivity : AppCompatActivity() {
     lateinit var customerId: String
     lateinit var ephemeralKey: String
     lateinit var clientSecretKey: String
+    private var apiInterface: ApiInterface = ApiUtilities.getApiInterface()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
         PaymentConfiguration.init(this, PUBLISHABLE_KEY)
-        getCustomerId()
 
         sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
@@ -76,7 +76,6 @@ class CartActivity : AppCompatActivity() {
             shoppingCartAdapter.showCheckBoxes(isDeleteMode) // Show/hide checkboxes
         }
 
-
         setupObservers()
         setupShoppingCartRecyclerView()
     }
@@ -93,7 +92,6 @@ class CartActivity : AppCompatActivity() {
         )
     }
 
-    private var apiInterface: ApiInterface = ApiUtilities.getApiInterface()
 
     private fun getCustomerId() {
         lifecycleScope.launch {

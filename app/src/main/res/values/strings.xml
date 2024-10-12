@@ -10,7 +10,7 @@
     <string name="introduzca_su_matricula">Introduzca su matricula</string>
     <string name="o">O</string>
     <string name="bienvenido">Bienvenido</string>
-    <string name="_1114226">111401</string>
+    <string name="_1114226">1114220</string>
     <string name="title_activity_home_activitys">Home_Activitys</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Likes</string>
@@ -22,12 +22,12 @@
     <string name="me_gusta">Favoritos</string>
     <string name="notificaciones">Notificaciones</string>
     <string name="perfil">Perfil</string>
-    <string name="accessing">Accediendo...</string>
+    <string name="accessing">Accediendo…</string>
     <string name="pls_wait">Por favor espera</string>
     <string name="viewing_application">Consultando tu solicitud</string>
     <string name="por_favor_espera">Por favor espera</string>
     <string name="logo">logo</string>
-    <string name="accediendo">Accediendo...</string>
+    <string name="accediendo">Accediendo…</string>
     <string name="invalid_credentials">El usuario o contraseña son incorrectos</string>
     <string name="close">Cerrar</string>
     <string name="service_unavailable">En estos momentos no se puede acceder al servicio. Inténtelo más tarde.</string>
@@ -75,4 +75,10 @@
     <string name="No_worries">No te preocupes, te enviaremos las instrucciones para restablecerla.</string>
     <string name="Enter_your_email">Ingrese su correo electrónico</string>
     <string name="Sent_email">Enviar correo</string>
+    <string name="Password">Contraseña</string>
+    <string name="Confirm_password">Confirmar contraseña</string>
+    <string name="set_new_password">Establecer nueva contraseña</string>
+    <string name="enter_new_password">Ingrese nueva contraseña</string>
+    <string name="must_be_at_least_8_characters">Debe tener al menos 8 caracteres</string>"
+
 </resources>

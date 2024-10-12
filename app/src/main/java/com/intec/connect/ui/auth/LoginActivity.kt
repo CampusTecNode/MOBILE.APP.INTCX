@@ -22,16 +22,13 @@ import com.intec.connect.data.model.LoginModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
 import com.intec.connect.ui.activities.Forgotpassword
-import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.ErrorDialogFragment
 import com.intec.connect.utilities.animations.ReboundAnimator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.bouncycastle.crypto.generators.Argon2BytesGenerator
-import org.bouncycastle.crypto.params.Argon2Parameters
-import java.util.Base64
+import java.security.MessageDigest
 
 /**
  * Activity for user login.
@@ -51,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
     private var messageIndex = 0
     private lateinit var messages: Array<String>
     private var isLoginInProgress = false
+    private val HEX_ARRAY = "0123456789ABCDEF".toCharArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -196,31 +194,23 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Hashes the given password using Argon2 algorithm.
-     *
-     * @param password The password to be hashed.
-     * @return The hashed password string.
-     */
     private fun hashPassword(password: String): String {
-        val salt = Constants.SALT.toByteArray()
+        val digest = MessageDigest.getInstance("SHA-256")
+        val hashBytes = digest.digest(password.toByteArray(Charsets.UTF_8))
 
-        val generator = Argon2BytesGenerator()
-        generator.init(
-            Argon2Parameters.Builder(Argon2Parameters.ARGON2_id)
-                .withSalt(salt)
-                .withParallelism(1)
-                .withMemoryAsKB(65536)
-                .withIterations(2)
-                .build()
-        )
-
-        val hash = ByteArray(32)
-        generator.generateBytes(password.toByteArray(), hash)
-
-        return Base64.getEncoder().encodeToString(salt) + "$" + Base64.getEncoder()
-            .encodeToString(hash)
+        return bytesToHex(hashBytes)
     }
+
+    private fun bytesToHex(bytes: ByteArray): String {
+        val hexChars = CharArray(bytes.size * 2)
+        for (i in bytes.indices) {
+            val v = bytes[i].toInt() and 0xFF
+            hexChars[i * 2] = HEX_ARRAY[v ushr 4]
+            hexChars[i * 2 + 1] = HEX_ARRAY[v and 0x0F]
+        }
+        return String(hexChars)
+    }
+
 
     /**
      * Animates the entrance of views in the activity.
