@@ -4,9 +4,12 @@ import android.util.Log
 import com.intec.connect.api.RetrofitApiClient
 import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
+import com.intec.connect.data.model.DeleteShoppingCartBody
 import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.data.model.Product
+import com.intec.connect.data.model.ShoppingCartBody
+import com.intec.connect.data.model.ShoppingCartByUser
 import com.intec.connect.data.model.UnlikeRequest
 import javax.inject.Inject
 
@@ -61,8 +64,8 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
         return handleResponse(response)
     }
 
-    suspend fun getProductsDetail(productId: Int, tokenModel: String): Product {
-        val response = userAPI.productsDetail(productId, tokenModel)
+    suspend fun getProductsDetail(productId: Int, userId: String, tokenModel: String): Product {
+        val response = userAPI.productsDetail(productId, userId, tokenModel)
 
         Log.d(TAG, "getProducts: $response")
 
@@ -93,6 +96,26 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
 
     suspend fun unlikeProduct(unlikeRequest: UnlikeRequest, token: String) {
         userAPI.unlikeProduct(token, unlikeRequest)
+    }
+
+    suspend fun shoppingCart(shoppingCartBody: ShoppingCartBody, token: String) {
+        userAPI.shoppingCart(token, shoppingCartBody)
+    }
+
+    suspend fun shoppingCartByUser(userId: String, token: String): ShoppingCartByUser {
+        val response = userAPI.shoppingCartByUser(userId, token)
+
+        Log.d(TAG, "shoppingCartByUser: $response")
+
+        return handleResponse(response)
+    }
+
+    suspend fun deleteShoppingCartItem(
+        id: Int,
+        token: String,
+        deleteShoppingCartBody: DeleteShoppingCartBody
+    ) {
+        userAPI.deleteShoppingCartItem(id, token, deleteShoppingCartBody)
     }
 
 }

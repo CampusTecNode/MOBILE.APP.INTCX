@@ -20,7 +20,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.intec.connect.R
@@ -34,11 +36,14 @@ import com.intec.connect.ui.adapters.CategoriesAdapter
 import com.intec.connect.ui.adapters.CategoriesProductAdapter
 import com.intec.connect.ui.adapters.ProductAdapter
 import com.intec.connect.ui.detailsProducts.ProductDetailActivity
+import com.intec.connect.ui.shopping.CartActivity
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
+import com.intec.connect.utilities.ShoppingCartBadgeManager
 import com.intec.connect.utilities.animations.ReboundAnimator
 import com.intec.connect.utilities.animations.ReboundAnimator.ReboundAnimatorType
+import com.intec.connect.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -51,7 +56,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityListener {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentHomeBinding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -62,6 +67,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var userId: String
     private lateinit var token: String
+    private lateinit var keyboardVisibilityListener: BottomNavigationActivity.KeyboardVisibilityListener
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private var isShimmerShown = false // Flag to track if shimmer has been shown
 
     /**
      * Inflates the fragment's view and returns the root view.
@@ -82,6 +91,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         sharedPrefs = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userId = sharedPrefs.getString(USERID_KEY, "")!!
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
+        keyboardVisibilityListener = this
+        (requireActivity() as? BottomNavigationActivity)?.addKeyboardVisibilityListener(
+            keyboardVisibilityListener
+        )
 
         return binding.root
     }
@@ -101,14 +114,48 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         setupAllProductsRecyclerView()
         setupSearchEditText()
         animateViewEntrance()
+        setupAddFabClickListener()
     }
 
+    private fun setupAddFabClickListener() {
+        binding.bagContainer.setOnClickListener {
+            val intent = Intent(requireContext(), CartActivity::class.java)
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                requireContext(),
+                R.anim.activity_transition_from_right,
+                R.anim.activity_transition_stay_visible
+            )
+            startActivity(intent, options.toBundle())
+        }
+    }
     /**
      * Sets up observers for the ViewModel's LiveData objects such as loading state,
      * categories, and products.
      */
     private fun setupObservers() {
 
+        sharedViewModel.categoriesProducts.observe(viewLifecycleOwner) { result ->
+            result.onSuccess { categoriesProducts ->
+                categoriesAdapter.updateCategories(categoriesProducts)
+                categoriesAdapter.notifyDataSetChanged()
+                Log.d("HomeFragment", "categoriesProducts observer triggered")
+            }
+            result.onFailure { error ->
+                Log.e("HomeFragment", "Error refreshing categoriesProducts", error)
+            }
+        }
+
+        // Observe products LiveData
+        sharedViewModel.products.observe(viewLifecycleOwner) { result ->
+            result.onSuccess { products ->
+                productAdapter.updateProducts(products)
+                productAdapter.notifyDataSetChanged()
+                Log.d("HomeFragment", "products observer triggered")
+            }
+            result.onFailure { error ->
+                Log.e("HomeFragment", "Error refreshing products", error)
+            }
+        }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
@@ -120,11 +167,18 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
                     .observe(viewLifecycleOwner) { result ->
                         handleCategoriesProductsResult(result)
                     }
+
                 homeViewModel.getProducts(userId, token).observe(viewLifecycleOwner) { result ->
                     handleProductsResult(result)
                 }
             }
         }
+    }
+
+    private fun updateBadgeCount() {
+        val badgeCount = ShoppingCartBadgeManager.getInstance().getBadgeCount()
+        binding.bagBadge.text = badgeCount.toString()
+        binding.bagBadge.visibility = if (badgeCount > 0) View.VISIBLE else View.GONE
     }
 
     /**
@@ -133,15 +187,14 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * @param isLoading Boolean indicating whether to show or hide the loading animation.
      */
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
+        if (isLoading && !isShimmerShown) {
             binding.shimmerFrameLayoutHomeView.visibility = View.VISIBLE
             binding.shimmerFrameLayoutHomeView.startShimmer()
-            // Hide the content views while loading
             binding.mainContainer.visibility = View.GONE
-        } else {
+            isShimmerShown = true
+        } else if (!isLoading) {
             binding.shimmerFrameLayoutHomeView.stopShimmer()
             binding.shimmerFrameLayoutHomeView.visibility = View.GONE
-            // Show the content views after loading
             binding.mainContainer.visibility = View.VISIBLE
         }
     }
@@ -221,13 +274,11 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             override fun onLike(product: Product, position: Int) {
 
                 homeViewModel.likeProduct(userId, product.id.toString(), token)
-                homeViewModel.refreshProducts(userId, token)
             }
 
             override fun onUnlike(product: Product, position: Int) {
 
                 homeViewModel.unlikeProduct(userId, product.id.toString(), token)
-                homeViewModel.refreshProducts(userId, token)
             }
 
         }, requireActivity(), binding.recyclerViewProducts)
@@ -276,6 +327,10 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
 
         }, requireActivity(), binding.recyclerViewAllProducts)
         binding.recyclerViewAllProducts.adapter = productAdapter
+
+        binding.textViewNewProductsVewMore.setOnClickListener {
+            findNavController().navigate(R.id.allProductsFragment)
+        }
     }
 
     /**
@@ -355,6 +410,7 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             binding.searchIdEditText,
             binding.textViewTitleCategories,
             binding.textViewNewProducts,
+            binding.bagContainer,
             binding.textViewNewProductsVewMore
         )
 
@@ -384,21 +440,41 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
      * @param isVisible Boolean indicating whether the keyboard is visible or not.
      */
     override fun onKeyboardVisibilityChanged(isVisible: Boolean) {
-        val params = binding.scrollView.layoutParams as ViewGroup.MarginLayoutParams
-        params.bottomMargin = if (isVisible) {
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        } else {
-            resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom)
+        _binding?.let { binding -> // Add null check
+            val params = binding.scrollView.layoutParams as ViewGroup.MarginLayoutParams
+            params.bottomMargin = if (isVisible) {
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            } else {
+                resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom)
+            }
+            binding.scrollView.layoutParams = params
         }
-        binding.scrollView.layoutParams = params
     }
 
     /**
      * Cleans up the view binding when the fragment is destroyed.
      */
     override fun onDestroyView() {
+        (requireActivity() as? BottomNavigationActivity)?.removeKeyboardVisibilityListener(
+            keyboardVisibilityListener
+        )
         _binding = null
         super.onDestroyView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.refreshProducts(userId, token)
+        loadShoppingCart()
+    }
+
+    private fun loadShoppingCart() {
+        homeViewModel.shoppingCartByUser(userId, token).observe(viewLifecycleOwner) { result ->
+            result.onSuccess { shoppingCart ->
+                val initialCount = shoppingCart.cartDetails.size
+                ShoppingCartBadgeManager.getInstance(initialCount)
+                updateBadgeCount()
+            }
+        }
+    }
 }

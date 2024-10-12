@@ -21,6 +21,7 @@ import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
+import com.intec.connect.ui.activities.Forgotpassword
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
@@ -49,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private var messageIndex = 0
     private lateinit var messages: Array<String>
+    private var isLoginInProgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,10 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.pls_wait),
             getString(R.string.viewing_application)
         )
+        binding.forgotPasswordTextView.setOnClickListener {
+            val intent = Intent(this, Forgotpassword::class.java)
+            startActivity(intent)
+        }
 
         observeLoginResult()
     }
@@ -94,20 +100,25 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun initiateLogin() {
         if (isInternetAvailable()) {
-            progressDialog.show()
+            if (!isLoginInProgress) {
+                isLoginInProgress = true
+                binding.signInButton.isEnabled = false
 
-            val matriculation = binding.vatIdEditText.text.toString()
-            val hashedPassword = hashPassword(binding.passwordEditText.text.toString())
+                progressDialog.show()
 
-            lifecycleScope.launch {
-                authViewModel.loginUser(
-                    LoginModel(
-                        username = matriculation,
-                        password = hashedPassword
+                val matriculation = binding.vatIdEditText.text.toString()
+                val hashedPassword = hashPassword(binding.passwordEditText.text.toString())
+
+                lifecycleScope.launch {
+                    authViewModel.loginUser(
+                        LoginModel(
+                            username = matriculation,
+                            password = hashedPassword
+                        )
                     )
-                )
+                }
+                handler.postDelayed(updateMessageRunnable, 6000)
             }
-            handler.postDelayed(updateMessageRunnable, 6000)
         } else {
             showErrorAlertDialog(Exception("No internet connection"))
         }
@@ -123,6 +134,8 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.loginResult.observe(this) { result ->
             progressDialog.dismiss()
             handler.removeCallbacks(updateMessageRunnable)
+            binding.signInButton.isEnabled = true
+            isLoginInProgress = false
 
             result.onSuccess { tokenModel ->
                 saveTokenAndNavigate(tokenModel)

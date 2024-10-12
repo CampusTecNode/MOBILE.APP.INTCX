@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -48,6 +49,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.androidx.room.common)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.recyclerview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -84,4 +90,12 @@ dependencies {
 
     implementation(libs.symbol.processing.api)
     implementation(libs.kotlin.parcelize.runtime)
+
+    implementation(libs.glide)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.stripe.java)
+    implementation(libs.stripe.android)
+
 }

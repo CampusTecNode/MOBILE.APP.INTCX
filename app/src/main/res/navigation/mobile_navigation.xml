@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.intec.connect.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <argument
             android:name="auth_token"
             android:defaultValue=""
@@ -44,4 +44,10 @@
             android:id="@+id/action_navigation_profile_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/allProductsFragment"
+        android:name="com.intec.connect.ui.allproducts.AllProductsFragment"
+        android:label="fragment_all_products_list"
+        tools:layout="@layout/fragment_all_products_list"></fragment>
+
 </navigation>

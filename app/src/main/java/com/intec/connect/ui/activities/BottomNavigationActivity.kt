@@ -1,8 +1,10 @@
 package com.intec.connect.ui.activities
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +12,11 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.intec.connect.R
 import com.intec.connect.databinding.ActivityBottomNavigationBinding
+import com.intec.connect.ui.shopping.CartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +24,8 @@ class BottomNavigationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBottomNavigationBinding
     private var keyboardVisibilityListener: KeyboardVisibilityListener? = null
+    private var keyboardVisibilityListeners =
+        mutableListOf<KeyboardVisibilityListener>() // Add this line
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +33,18 @@ class BottomNavigationActivity : AppCompatActivity() {
         setupNavigation()
         setupKeyboardVisibilityListener()
         setupAddFabClickListener()
+        FirebaseApp.initializeApp(this)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
+
+            }
+
+            val token = task.result
+            Log.d(TAG, "FCM registration token: $token")
+        }
     }
 
     /**
@@ -55,10 +74,10 @@ class BottomNavigationActivity : AppCompatActivity() {
      */
     private fun setupAddFabClickListener() {
         binding.addFab.setOnClickListener {
-            val intent = Intent(this, BagActivity::class.java)
+            val intent = Intent(this, CartActivity::class.java)
             val options = ActivityOptionsCompat.makeCustomAnimation(
                 this,
-                R.anim.activity_transition_from_bottom,
+                R.anim.activity_transition_from_right,
                 R.anim.activity_transition_stay_visible
             )
             startActivity(intent, options.toBundle())
@@ -103,12 +122,28 @@ class BottomNavigationActivity : AppCompatActivity() {
     private fun toggleUIVisibility(isVisible: Boolean) {
         if (isVisible) {
             binding.addFab.show()
-            binding.bottomAppBar.visibility = View.VISIBLE
+            val params = binding.bottomAppBar.layoutParams
+            params.height =
+                resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom_inverse)
+            binding.bottomAppBar.layoutParams = params
         } else {
             binding.addFab.hide()
-            binding.bottomAppBar.visibility = View.GONE
+            val params = binding.bottomAppBar.layoutParams
+            params.height = 1
+            binding.bottomAppBar.layoutParams = params
         }
-        keyboardVisibilityListener?.onKeyboardVisibilityChanged(!isVisible)
+
+        for (listener in keyboardVisibilityListeners) {
+            listener.onKeyboardVisibilityChanged(!isVisible)
+        }
+    }
+
+    fun addKeyboardVisibilityListener(listener: KeyboardVisibilityListener) {
+        keyboardVisibilityListeners.add(listener)
+    }
+
+    fun removeKeyboardVisibilityListener(listener: KeyboardVisibilityListener) {
+        keyboardVisibilityListeners.remove(listener)
     }
 
     /**

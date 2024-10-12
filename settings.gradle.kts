@@ -23,4 +23,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Intec Connect"
-include(":app")
+include("app", "core")
+
