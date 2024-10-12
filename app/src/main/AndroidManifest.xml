@@ -17,7 +17,7 @@
         android:theme="@style/Theme.IntecConnect"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.ResetPassword"
+            android:name=".ui.activities.booking"
             android:exported="false" />
         <activity
             android:name=".ui.activities.Forgotpassword"
