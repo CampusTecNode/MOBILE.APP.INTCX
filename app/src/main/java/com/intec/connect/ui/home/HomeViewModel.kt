@@ -1,11 +1,14 @@
 package com.intec.connect.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.common.api.ApiException
 import com.intec.connect.data.model.CategoriesProducts
 import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.Product
+import com.intec.connect.data.model.ShoppingCartByUser
 import com.intec.connect.data.model.UnlikeRequest
 import com.intec.connect.repository.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +21,8 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
 
     private val _categoriesProducts = MutableLiveData<Result<CategoriesProducts>>()
     private val _products = MutableLiveData<Result<List<Product>>>()
+    private val _shoppingCartByUser = MutableLiveData<Result<ShoppingCartByUser>>()
+
     val isLoading = MutableLiveData<Boolean>()
 
     /**
@@ -115,4 +120,22 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
             }
         }
     }
+
+    fun shoppingCartByUser(userId: String, token: String): LiveData<Result<ShoppingCartByUser>> {
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            try {
+                val shoppingCartBody = repository.shoppingCartByUser(userId, token)
+                _shoppingCartByUser.value = Result.success(shoppingCartBody)
+            } catch (e: Exception) {
+                _shoppingCartByUser.value = Result.failure(e)
+            } catch (e: ApiException) {
+                _shoppingCartByUser.value = Result.failure(e)
+            } finally {
+                isLoading.postValue(false)
+            }
+        }
+        return _shoppingCartByUser
+    }
+
 }

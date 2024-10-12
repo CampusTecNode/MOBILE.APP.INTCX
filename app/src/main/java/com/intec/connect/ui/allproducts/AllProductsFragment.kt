@@ -227,13 +227,12 @@ class AllProductsFragment : Fragment(), BottomNavigationActivity.KeyboardVisibil
     override fun onKeyboardVisibilityChanged(isVisible: Boolean) {
         val params = binding.mainContainer.layoutParams as ViewGroup.MarginLayoutParams
         params.bottomMargin = if (isVisible) {
-            0 // Remove bottom margin when keyboard is visible
+            0  // 0dp cuando el teclado es visible
         } else {
-            resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom) // Restore original margin
+            resources.getDimensionPixelSize(R.dimen.scroll_view_margin_bottom) // 85dp cuando está oculto
         }
         binding.mainContainer.layoutParams = params
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

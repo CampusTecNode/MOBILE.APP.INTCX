@@ -22,6 +22,8 @@ lifecycleLivedataKtx = "2.8.6"
 lifecycleViewmodelKtx = "2.8.6"
 retrofit = "2.11.0"
 shimmer = "0.5.0"
+stripeAndroid = "20.52.0"
+stripeJava = "27.0.0"
 symbolProcessingApi = "1.9.0-1.0.13"
 firebaseMessagingKtx = "24.0.2"
 roomCommon = "2.6.1"
@@ -55,6 +57,8 @@ androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecy
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+stripe-android = { module = "com.stripe:stripe-android", version.ref = "stripeAndroid" }
+stripe-java = { module = "com.stripe:stripe-java", version.ref = "stripeJava" }
 symbol-processing-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "symbolProcessingApi" }
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }

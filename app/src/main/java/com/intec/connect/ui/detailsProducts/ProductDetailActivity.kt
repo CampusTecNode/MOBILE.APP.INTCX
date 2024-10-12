@@ -15,7 +15,11 @@ import com.intec.connect.R
 import com.intec.connect.databinding.ActivityProductsDetailsBinding
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
+import com.intec.connect.utilities.Constants.USERID_KEY
+import com.intec.connect.utilities.DialogFragmentCart
+import com.intec.connect.utilities.ShoppingCartBadgeManager
 import com.intec.connect.utilities.animations.ReboundAnimator
+import com.intec.connect.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,6 +32,10 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var token: String
     private var productId: Int = 0
     private var originalPrice = 0.0
+    private var isLiked = false
+    private var count = 1
+
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +45,10 @@ class ProductDetailActivity : AppCompatActivity() {
 
         sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
+        userId = sharedPrefs.getString(USERID_KEY, "")!!
 
         setContentView(binding.root)
+        updateBadgeCount()
 
         setupObservers()
         setupCounter()
@@ -58,14 +68,81 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         })
 
-
         binding.backArrow.setOnClickListener {
             finishWithAnimation()
         }
+
+        binding.favoriteButton.setOnClickListener {
+            updateFavoriteButtonAppearance(!isLiked)
+
+            if (isLiked) {
+                productsDetailViewModel.unlikeProduct(userId, productId, token)
+                    .observe(this) { result ->
+                        result.onSuccess {
+                            sharedViewModel.refreshHomeData(userId, token)
+                        }
+                    }
+            } else {
+                productsDetailViewModel.likeProduct(userId, productId, token)
+                    .observe(this) { result ->
+                        result.onSuccess {
+                            sharedViewModel.refreshHomeData(userId, token)
+                        }
+                    }
+            }
+        }
+
+        binding.constraintLayout6.setOnClickListener {
+            productsDetailViewModel.shoppingCart(userId, productId, count, token)
+                .observe(this) { result ->
+                    result.onSuccess {
+                        productsDetailViewModel.shoppingCartByUser(userId, token)
+                            .observe(this) { result ->
+                                result.onSuccess {
+
+                                }
+                            }
+                    }
+                }
+        }
+
+        binding.constraintLayout6.setOnClickListener {
+            productsDetailViewModel.shoppingCart(userId, productId, count, token)
+                .observe(this) { result ->
+                    result.onSuccess {
+                        productsDetailViewModel.shoppingCartByUser(userId, token)
+                            .observe(this) { result ->
+                                result.onSuccess { shoppingCart ->
+                                    showErrorAlertDialog()
+
+                                    val newCartSize = shoppingCart.cartDetails.size
+
+                                    val badgeManager = ShoppingCartBadgeManager.getInstance()
+                                    badgeManager.setBadgeCount(newCartSize)
+
+                                    updateBadgeCount()
+                                    resetProductDetails()
+                                }
+                            }
+                    }
+                }
+        }
+    }
+
+    private fun showErrorAlertDialog() {
+        val dialogFragment = DialogFragmentCart.newInstance(
+            "Producto agregado.", R.raw.add_cart
+        )
+        dialogFragment.show(supportFragmentManager, "error_dialog")
+    }
+
+    private fun updateBadgeCount() {
+        val badgeCount = ShoppingCartBadgeManager.getInstance().getBadgeCount()
+        binding.bagBadge.text = badgeCount.toString()
+        binding.bagBadge.visibility = if (badgeCount > 0) View.VISIBLE else View.GONE
     }
 
     private fun setupCounter() {
-        var count = 1
         binding.textViewCount.text = count.toString()
 
         binding.buttonMinus.setOnClickListener {
@@ -100,34 +177,44 @@ class ProductDetailActivity : AppCompatActivity() {
             showLoading(isLoading)
         }
 
-        token.let { it1 ->
-            productsDetailViewModel.getProductsDetail(productId, it1).observe(this) { result ->
-                result.onSuccess { product ->
-                    binding.nameProduct.text = product.name
-                    binding.brand.text = product.brand
-                    binding.productDetail.text = product.description
-                    binding.stockText.text = product.stock.toString()
-                    binding.colorText.text = product.color
-                    binding.weightText.text = product.weight.toString()
-                    binding.sizeText.text = product.size
-                    binding.skuText.text = product.sku
-                    binding.productPriceText.text = product.price
+        userId.let {
+            token.let {
+                productsDetailViewModel.getProductsDetail(productId, userId, token)
+                    .observe(this) { result ->
+                        result.onSuccess { product ->
+                            binding.nameProduct.text = product.name
+                            binding.brand.text = product.brand
+                            binding.productDetail.text = product.description
+                            binding.stockText.text = product.stock.toString()
+                            binding.colorText.text = product.color
+                            binding.weightText.text = product.weight.toString()
+                            binding.sizeText.text = product.size
+                            binding.skuText.text = product.sku
+                            binding.productPriceText.text = product.price
 
-                    updateFavoriteButtonAppearance(product.liked)
+                            isLiked = product.liked
+                            updateFavoriteButtonAppearance(isLiked)
 
+                            binding.productPriceText.text = product.price
+                            originalPrice = product.price.toDoubleOrNull() ?: 0.0
+                            updateTotalPrice(1)
 
-                    binding.productPriceText.text = product.price
-                    originalPrice = product.price.toDoubleOrNull() ?: 0.0
-                    updateTotalPrice(1)
-                }.onFailure { error ->
-                    Log.e(
-                        "ProductDetailActivity",
-                        "Error al obtener los detalles del producto",
-                        error
-                    )
-                }
+                        }.onFailure { error ->
+                            Log.e(
+                                "ProductDetailActivity",
+                                "Error al obtener los detalles del producto",
+                                error
+                            )
+                        }
+                    }
             }
         }
+    }
+
+    private fun resetProductDetails() {
+        count = 1
+        binding.textViewCount.text = count.toString()
+        updateTotalPrice(count)
     }
 
     private fun updateTotalPrice(count: Int) {
@@ -135,15 +222,14 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.productPriceText.text = totalPrice.toString()
     }
 
-
     private fun updateFavoriteButtonAppearance(isLiked: Boolean) {
+
         if (isLiked) {
             binding.favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
         } else {
             binding.favoriteButton.setImageResource(R.drawable.favorite_24dp_fill)
         }
     }
-
 
     /**
      * Displays or hides the loading animation based on the loading state.
@@ -172,6 +258,7 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.title,
             binding.backArrow,
             binding.image,
+            binding.bagContainer,
             binding.constraintLayout,
             binding.nameProduct,
             binding.brand,
@@ -180,7 +267,7 @@ class ProductDetailActivity : AppCompatActivity() {
             binding.productDetail,
             binding.characteristics,
             binding.characteristicsContainer,
-            binding.productPriceContainerMain,
+            binding.productPriceContainer,
             binding.constraintLayout6,
             binding.linearLayout2
         )
@@ -207,6 +294,6 @@ class ProductDetailActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        productsDetailViewModel.getProductsDetail(-1, "").removeObservers(this)
+        productsDetailViewModel.getProductsDetail(-1, "", "").removeObservers(this)
     }
 }
