@@ -20,7 +20,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="inicio">Inicio</string>
     <string name="me_gusta">Favoritos</string>
-    <string name="notificaciones">Notificacion</string>
+    <string name="notificaciones">Notificaciones</string>
     <string name="perfil">Perfil</string>
     <string name="accessing">Accediendo...</string>
     <string name="pls_wait">Por favor espera</string>
@@ -68,4 +68,11 @@
     <string name="_10">10</string>
     <string name="eliminar_notici_n">Eliminar Notición</string>
     <string name="ir_a_pagos">Ir a pagos</string>
+    <string name="Email">Correo electrónico</string>
+    <string name="Forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="Reset_password">Restablecer contraseña</string>
+    <string name="Back_to_log_in">Volver a iniciar sesión</string>
+    <string name="No_worries">No te preocupes, te enviaremos las instrucciones para restablecerla.</string>
+    <string name="Enter_your_email">Ingrese su correo electrónico</string>
+    <string name="Sent_email">Enviar correo</string>
 </resources>

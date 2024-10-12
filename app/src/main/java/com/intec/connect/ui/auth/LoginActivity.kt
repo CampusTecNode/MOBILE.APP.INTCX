@@ -21,6 +21,7 @@ import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
+import com.intec.connect.ui.activities.Forgotpassword
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
@@ -70,6 +71,10 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.pls_wait),
             getString(R.string.viewing_application)
         )
+        binding.forgotPasswordTextView.setOnClickListener {
+            val intent = Intent(this, Forgotpassword::class.java)
+            startActivity(intent)
+        }
 
         observeLoginResult()
     }
