@@ -81,7 +81,7 @@ dependencies {
     implementation(libs.shimmer)
 
     //Hashed
-    implementation(libs.bcprov.jdk15on)
+    implementation(libs.conscrypt.android)
 
     implementation (libs.converter.gson)
     implementation (libs.logging.interceptor)
@@ -95,6 +95,9 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.stripe.java)
+    implementation(libs.stripe.android)
+
     implementation(libs.stripe.java)
     implementation(libs.stripe.android)
 
