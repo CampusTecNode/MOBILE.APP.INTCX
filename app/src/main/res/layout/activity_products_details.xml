@@ -25,7 +25,6 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
     </FrameLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
@@ -63,6 +62,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/bag_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            app:layout_constraintBottom_toBottomOf="@+id/back_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_arrow">
+
+            <ImageView
+                android:id="@+id/bag"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_edittext"
+                android:contentDescription="@string/button_back"
+                android:padding="3dp"
+                android:src="@drawable/bag_fill" />
+
+            <TextView
+                android:id="@+id/bag_badge"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/badge_drawable"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="@string/_10"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/image"
@@ -197,7 +231,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Stok:"
-                            android:textColor="@color/text_description_details"
+                            android:textColor="?android:attr/textColor"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -230,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Color:"
-                            android:textColor="@color/text_description_details"
+                            android:textColor="?android:attr/textColor"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -271,7 +305,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="@string/dimenciones"
-                            android:textColor="@color/text_description_details"
+                            android:textColor="?android:attr/textColor"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -304,7 +338,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="@string/size"
-                            android:textColor="@color/text_description_details"
+                            android:textColor="?android:attr/textColor"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -344,7 +378,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="SKU:"
-                            android:textColor="@color/text_description_details"
+                            android:textColor="?android:attr/textColor"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -365,17 +399,16 @@
                     </LinearLayout>
                 </LinearLayout>
 
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/product_price_container_main"
-                android:layout_width="90dp"
+                android:id="@+id/product_price_container"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout6"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout6">
+                app:layout_constraintTop_toTopOf="@+id/linearLayout2">
 
                 <TextView
                     android:id="@+id/symbol_money"
@@ -383,11 +416,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/poppins_bold"
                     android:gravity="center_horizontal"
                     android:text="@string/product_price"
                     android:textColor="?android:attr/textColor"
-                    android:textSize="9sp"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toStartOf="@id/product_price_text"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
@@ -396,13 +429,14 @@
                 <TextView
                     android:id="@+id/product_price_text"
                     style="@style/Product.Name"
-                    android:layout_width="56dp"
-                    android:layout_height="34dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/poppins_bold"
                     android:gravity="center_horizontal"
                     android:text="@string/_100_00"
                     android:textColor="?android:attr/textColor"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/symbol_money"
@@ -450,9 +484,9 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="110dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="35dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/rounded_background_item_count"
                 android:gravity="center"
                 android:orientation="horizontal"

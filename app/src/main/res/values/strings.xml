@@ -65,4 +65,7 @@
     <string name="default_notification_channel_id">0</string>
     <string name="listado_de_productos">Catalogo de productos</string>
     <string name="el_producto_que_busca_no_se_encuentra_en_inventario">El producto no se encuentra en inventario</string>
+    <string name="_10">10</string>
+    <string name="eliminar_notici_n">Eliminar Notición</string>
+    <string name="ir_a_pagos">Ir a pagos</string>
 </resources>

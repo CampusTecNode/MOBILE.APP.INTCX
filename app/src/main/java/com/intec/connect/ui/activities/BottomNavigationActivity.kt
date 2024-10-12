@@ -16,6 +16,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.intec.connect.R
 import com.intec.connect.databinding.ActivityBottomNavigationBinding
+import com.intec.connect.ui.shopping.CartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,10 +74,10 @@ class BottomNavigationActivity : AppCompatActivity() {
      */
     private fun setupAddFabClickListener() {
         binding.addFab.setOnClickListener {
-            val intent = Intent(this, BagActivity::class.java)
+            val intent = Intent(this, CartActivity::class.java)
             val options = ActivityOptionsCompat.makeCustomAnimation(
                 this,
-                R.anim.activity_transition_from_bottom,
+                R.anim.activity_transition_from_right,
                 R.anim.activity_transition_stay_visible
             )
             startActivity(intent, options.toBundle())
