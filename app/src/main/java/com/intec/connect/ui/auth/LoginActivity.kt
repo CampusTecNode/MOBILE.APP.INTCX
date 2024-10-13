@@ -21,7 +21,7 @@ import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.databinding.ActivityLoginBinding
 import com.intec.connect.ui.activities.BottomNavigationActivity
-import com.intec.connect.ui.activities.Forgotpassword
+import com.intec.connect.ui.activities.ForgotPasswordActivity
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.ErrorDialogFragment
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             getString(R.string.viewing_application)
         )
         binding.forgotPasswordTextView.setOnClickListener {
-            val intent = Intent(this, Forgotpassword::class.java)
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
 
