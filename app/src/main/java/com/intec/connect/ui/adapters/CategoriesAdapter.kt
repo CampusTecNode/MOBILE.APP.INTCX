@@ -96,14 +96,10 @@ class CategoriesAdapter(
         holder.categoryTitle.text = categoriesProductsItem.name
         categoriesProductsItem.imageURL
 
-        if (categoriesProductsItem.imageURL != null) {
-            context?.let {
-                Glide.with(it)
-                    .load(categoriesProductsItem.imageURL)
-                    .into(holder.categoryImage)
-            }
-        } else {
-            holder.categoryImage.setBackgroundResource(R.drawable.fastfood_24dp)
+        context?.let {
+            Glide.with(it)
+                .load(categoriesProductsItem.imageURL)
+                .into(holder.categoryImage)
         }
 
         if (position == selectedCategoryIndex) {

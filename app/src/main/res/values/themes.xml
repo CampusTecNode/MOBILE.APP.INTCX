@@ -60,7 +60,6 @@
     </style>
 
     <style name="Base.Theme.IntecConnect.Fragments.view" parent="Theme.Material3.DayNight.NoActionBar">
-
         <item name="colorPrimary">@color/primary_color</item>
         <item name="android:textColor">@color/text_color_light</item>
         <item name="android:textAppearanceButton">@color/text_color_dark</item>
@@ -140,7 +139,7 @@
         <item name="android:textColor">@color/primary_color</item>
     </style>
     <style name="ImageStyle_Circle">
-        <item name="cornerSize">50%</item>
+        <item name="cornerSize">10%</item>
     </style>
 
 </resources>

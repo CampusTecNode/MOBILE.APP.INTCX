@@ -7,26 +7,24 @@
     android:background="@drawable/rounded_card_view_item_adapter"
     android:padding="8dp">
 
+
     <FrameLayout
         android:id="@+id/bag_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:backgroundTint="@color/red_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/product_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:contentDescription="@null"
-            android:scaleType="centerInside"
-            android:src="@drawable/mascotas"
-            app:layout_constraintBottom_toBottomOf="@+id/back_arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/back_arrow" />
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_image_holder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ImageStyle_Circle" />
+
     </FrameLayout>
 
     <TextView
@@ -37,6 +35,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
+
         android:focusableInTouchMode="false"
         android:fontFamily="@font/poppins_regular"
         android:gravity="start"
@@ -50,10 +49,12 @@
         app:layout_constraintStart_toEndOf="@+id/bag_container"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
+    <ImageButton
         android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="22sp"
+        android:layout_height="22dp"
+        android:background="@drawable/delete_forever_24dp_fill"
+        android:backgroundTint="@color/primary_color"
         app:layout_constraintBottom_toTopOf="@+id/product_price_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

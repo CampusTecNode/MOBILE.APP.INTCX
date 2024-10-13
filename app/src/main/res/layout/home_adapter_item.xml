@@ -6,6 +6,24 @@
     android:layout_marginHorizontal="8dp"
     android:background="@drawable/rounded_card_view_item_adapter">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
+            app:lottie_rawRes="@raw/like" />
+    </FrameLayout>
+
     <ImageButton
         android:id="@+id/favorite_button"
         android:layout_width="24dp"
@@ -18,17 +36,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/product_image"
-        android:layout_width="130dp"
-        android:layout_height="160dp"
-        android:contentDescription="@null"
+        android:layout_width="160dp"
+        android:layout_height="175dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/mascotas"
+        android:src="@drawable/profile_image_holder"
         app:layout_constraintBottom_toTopOf="@id/product_name_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_button" />
+        app:layout_constraintTop_toBottomOf="@+id/favorite_button"
+        app:shapeAppearanceOverlay="@style/ImageStyle_Circle" />
 
     <TextView
         android:id="@+id/product_name_text"
@@ -36,12 +56,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:maxLines="1"
         android:focusableInTouchMode="false"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center_horizontal"
         android:includeFontPadding="false"
+        android:maxLines="1"
         android:text="@string/product_name"
         android:textColor="?android:attr/textColor"
         android:textSize="18sp"
@@ -57,9 +78,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="10dp"
-        android:maxLines="1"
         android:fontFamily="@font/poppins_light"
         android:gravity="center_horizontal"
+        android:maxLines="1"
         android:text="@string/product_name"
         android:textColor="@color/text_description"
         android:textSize="12sp"

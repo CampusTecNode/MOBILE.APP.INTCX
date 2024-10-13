@@ -41,7 +41,7 @@ class ShoppingViewModel @Inject constructor(private val repository: RetrofitRepo
     fun deleteShoppingCartItem(
         cartId: Int,
         productId: Int,
-        id: Int,
+        id: String,
         token: String
     ): LiveData<Result<Boolean>> {
         val result = MutableLiveData<Result<Boolean>>()
