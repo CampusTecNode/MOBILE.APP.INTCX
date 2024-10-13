@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.intec.connect.R
 import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
@@ -22,8 +22,7 @@ class CategoryProductViewHolder(
     listener: ClickListener<Product>,
     private val likeClickListener: LikeClickListener
 
-) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-    var isLiked = false
+) : BaseViewHolder(itemView), View.OnClickListener {
 
     var item: Product? = null
 
@@ -32,28 +31,19 @@ class CategoryProductViewHolder(
     var productDescription: TextView = itemView.findViewById(R.id.product_description_text)
     var productName: TextView = itemView.findViewById(R.id.product_name_text)
     var productPrice: TextView = itemView.findViewById(R.id.product_price_text)
+    var lottieAnimationView: LottieAnimationView = itemView.findViewById(R.id.lottieAnimationView)
 
     private val clickListener = listener
 
     init {
         itemView.setOnClickListener(this)
         favoriteButton.setOnClickListener {
-            item?.let {
-                it.liked = !it.liked
-                isLiked = it.liked
-            }
-
-            updateFavoriteButtonAppearance(isLiked)
-
             val product = item ?: return@setOnClickListener
-
-            if (product.liked) {
-                likeClickListener.onLike(product, adapterPosition)
-            } else {
-                likeClickListener.onUnlike(product, adapterPosition)
-            }
+            handleLikeClick(product, likeClickListener)
+            updateFavoriteButtonAppearance(isLiked)
         }
     }
+
 
     fun updateFavoriteButtonAppearance(isLiked: Boolean) {
         if (isLiked) {

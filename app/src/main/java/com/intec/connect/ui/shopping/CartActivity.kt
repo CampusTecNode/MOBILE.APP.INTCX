@@ -19,6 +19,7 @@ import com.intec.connect.api.stripe.Ultils.PUBLISHABLE_KEY
 import com.intec.connect.data.model.CartDetail
 import com.intec.connect.databinding.ActivityBagBinding
 import com.intec.connect.interfaces.ClickListener
+import com.intec.connect.interfaces.DeleteModeListener
 import com.intec.connect.ui.adapters.ShoppingCartAdapter
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
@@ -33,7 +34,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity(), DeleteModeListener {
     private lateinit var binding: ActivityBagBinding
     private val shoppingViewModel: ShoppingViewModel by viewModels()
     private lateinit var sharedPrefs: SharedPreferences
@@ -72,12 +73,15 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.deleteItem.setOnClickListener {
-            isDeleteMode = !isDeleteMode // Toggle delete mode
-            shoppingCartAdapter.showCheckBoxes(isDeleteMode) // Show/hide checkboxes
+            isDeleteMode = !isDeleteMode
+            shoppingCartAdapter.showCheckBoxes(isDeleteMode)
+            shoppingCartAdapter.updateDeleteMode(isDeleteMode)
         }
+
 
         setupObservers()
         setupShoppingCartRecyclerView()
+
     }
 
     private fun payFlow() {
@@ -135,8 +139,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-
-    fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
+    private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
         if (paymentSheetResult is PaymentSheetResult.Completed) {
             showErrorAlertDialog()
         }
@@ -187,9 +190,14 @@ class CartActivity : AppCompatActivity() {
             override fun onClick(view: View, item: CartDetail, position: Int) {
 
             }
-        }, this, binding.shoppingCartRecyclerView, onDeleteClickListener = { selectedItemIds ->
-
-        })
+        }, this, binding.shoppingCartRecyclerView, onDeleteClickListener = { cartDetail ->
+            shoppingViewModel.deleteShoppingCartItem(
+                cartDetail.id,
+                cartDetail.product.id,
+                userId,
+                token
+            )
+        }, isDeleteMode, this)
 
         binding.shoppingCartRecyclerView.adapter = shoppingCartAdapter
 
@@ -213,7 +221,6 @@ class CartActivity : AppCompatActivity() {
             binding.mainContainer.visibility = View.VISIBLE
         }
     }
-
 
     private fun animateViewEntrance() {
         val viewsToAnimate = listOf(
@@ -253,4 +260,7 @@ class CartActivity : AppCompatActivity() {
         )
     }
 
+    override fun isDeleteMode(): Boolean {
+        return isDeleteMode
+    }
 }

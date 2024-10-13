@@ -272,15 +272,12 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             }
         }, object : LikeClickListener {
             override fun onLike(product: Product, position: Int) {
-
                 homeViewModel.likeProduct(userId, product.id.toString(), token)
             }
 
             override fun onUnlike(product: Product, position: Int) {
-
                 homeViewModel.unlikeProduct(userId, product.id.toString(), token)
             }
-
         }, requireActivity(), binding.recyclerViewProducts)
         binding.recyclerViewProducts.adapter = categoriesProductAdapter
 

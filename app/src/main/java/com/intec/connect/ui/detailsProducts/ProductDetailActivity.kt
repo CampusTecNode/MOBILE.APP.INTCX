@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
 import com.intec.connect.R
 import com.intec.connect.databinding.ActivityProductsDetailsBinding
 import com.intec.connect.utilities.Constants
@@ -192,6 +193,10 @@ class ProductDetailActivity : AppCompatActivity() {
                             binding.skuText.text = product.sku
                             binding.productPriceText.text = product.price
 
+                            Glide.with(this)
+                                .load(product.imageURL)
+                                .into(binding.productImage)
+
                             isLiked = product.liked
                             updateFavoriteButtonAppearance(isLiked)
 
@@ -257,7 +262,7 @@ class ProductDetailActivity : AppCompatActivity() {
         val viewsToAnimate = listOf(
             binding.title,
             binding.backArrow,
-            binding.image,
+            binding.productImage,
             binding.bagContainer,
             binding.constraintLayout,
             binding.nameProduct,

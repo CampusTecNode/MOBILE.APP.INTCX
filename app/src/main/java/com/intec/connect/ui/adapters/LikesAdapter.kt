@@ -55,14 +55,10 @@ class LikesAdapter(
 
         holder.updateFavoriteButtonAppearance(product.liked)
 
-        if (product.imageURL.isNotEmpty()) {
             context?.let {
                 Glide.with(it)
                     .load(product.imageURL)
                     .into(holder.productImage)
-            }
-        } else {
-            holder.productImage.setImageResource(R.drawable.mascotas)
         }
 
         val animators: Array<Animator> =

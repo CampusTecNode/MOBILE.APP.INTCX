@@ -67,9 +67,9 @@ interface RetrofitApiClient {
         @Header("Authorization") authHeader: String
     ): Response<ShoppingCartByUser>
 
-    @GET("/shoppingCart/{id}")
+    @POST("/shoppingCart/{id}")
     suspend fun deleteShoppingCartItem(
-        @Path("id") productId: Int,
+        @Path("id") productId: String,
         @Header("Authorization") authHeader: String,
         @Body bodyShoppingCartBody: DeleteShoppingCartBody
     ): Response<ShoppingCartByUser>
