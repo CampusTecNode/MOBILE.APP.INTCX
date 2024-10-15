@@ -24,6 +24,8 @@ import com.intec.connect.ui.activities.BottomNavigationActivity
 import com.intec.connect.utilities.Constants.HEX_ARRAY
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
+import com.intec.connect.utilities.Constants.USER_NAME
+import com.intec.connect.utilities.Constants.USER_LAST_NAME
 import com.intec.connect.utilities.ErrorDialogFragment
 import com.intec.connect.utilities.animations.ReboundAnimator
 import dagger.hilt.android.AndroidEntryPoint
@@ -170,6 +172,8 @@ class LoginActivity : AppCompatActivity() {
         val sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         sharedPrefs.edit().putString(TOKEN_KEY, authResponse.token).apply()
         sharedPrefs.edit().putString(USERID_KEY, authResponse.userID).apply()
+        sharedPrefs.edit().putString(USER_NAME, authResponse.name).apply()
+        sharedPrefs.edit().putString(USER_LAST_NAME, authResponse.lastname).apply()
 
         val intent = Intent(this, BottomNavigationActivity::class.java)
 
