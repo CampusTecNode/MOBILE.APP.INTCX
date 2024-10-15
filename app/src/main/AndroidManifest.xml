@@ -16,10 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntecConnect"
         tools:targetApi="31">
+
         <activity
-            android:name=".ui.activities.booking"
+            android:name=".ui.activities.BookingActivity"
             android:exported="false"
+            android:theme="@style/Base.Theme.IntecConnect"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.spaces.SpacesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.IntecConnect" />
+
         <activity
             android:name=".ui.auth.ForgotPasswordActivity"
             android:exported="false"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_camara"
+        android:icon="@drawable/ic_calendar_clock"
+        android:title="" />
+    <item
+        android:id="@+id/action_mensaje"
+        android:icon="@drawable/calendar_month_24dp"
+        android:title="" />
+    <item
+        android:id="@+id/action_llamada"
+        android:icon="@drawable/ic_book"
+        android:title="" />
+</menu>

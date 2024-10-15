@@ -12,6 +12,7 @@ import com.intec.connect.data.model.Product
 import com.intec.connect.data.model.SendResetPassword
 import com.intec.connect.data.model.ShoppingCartBody
 import com.intec.connect.data.model.ShoppingCartByUser
+import com.intec.connect.data.model.SpacesItem
 import com.intec.connect.data.model.UnlikeRequest
 import javax.inject.Inject
 
@@ -134,6 +135,14 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
     }
 
     suspend fun getNotifications(userId: String, token: String): List<Notification> {
+        return userAPI.getNotifications(userId, token)
+    }
+
+    suspend fun getSpaces(token: String): List<SpacesItem> {
+        return userAPI.getSpaces(token)
+    }
+
+    suspend fun getSpacesByUser(userId: String, token: String): List<Notification> {
         return userAPI.getNotifications(userId, token)
     }
 

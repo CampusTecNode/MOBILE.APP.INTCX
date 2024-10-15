@@ -14,7 +14,7 @@
         android:enabled="false"/>
 
     <item android:id="@+id/navigation_notifications"
-        android:icon="@drawable/notification_icon_selector"
+        android:icon="@drawable/notifications_24dp"
         android:title="@string/notificaciones"/>
 
     <item android:id="@+id/navigation_profile"

@@ -10,6 +10,7 @@ import com.intec.connect.data.model.Product
 import com.intec.connect.data.model.SendResetPassword
 import com.intec.connect.data.model.ShoppingCartBody
 import com.intec.connect.data.model.ShoppingCartByUser
+import com.intec.connect.data.model.SpacesItem
 import com.intec.connect.data.model.UnlikeRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -91,5 +92,16 @@ interface RetrofitApiClient {
         @Path("userID") userId: String,
         @Header("Authorization") token: String
     ): List<Notification>
+
+    @GET("/spaces/")
+    suspend fun getSpaces(
+        @Header("Authorization") authHeader: String
+    ): List<SpacesItem>
+
+    @GET("/spaces/{userID}")
+    suspend fun getSpacesByUser(
+        @Path("userID") userId: String,
+        @Header("Authorization") authHeader: String
+    ): List<SpacesItem>
 
 }

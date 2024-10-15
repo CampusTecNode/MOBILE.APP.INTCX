@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/title_home"
-        android:src="@drawable/bag_fill"
+        android:src="@drawable/calendar_month_24dp"
         android:theme="@style/Theme.BottomNavigationApp.BottomNavigationView"
         app:backgroundTint="@color/primary_color"
         app:layout_anchor="@id/bottomAppBar"

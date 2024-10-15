@@ -6,15 +6,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.intec.connect.R
-import com.intec.connect.api.stripe.ApiInterface
-import com.intec.connect.api.stripe.ApiUtilities
 import com.intec.connect.api.stripe.Ultils.PUBLISHABLE_KEY
 import com.intec.connect.data.model.CartDetail
 import com.intec.connect.databinding.ActivityBagBinding
@@ -27,12 +23,7 @@ import com.intec.connect.utilities.DialogFragmentCart
 import com.intec.connect.utilities.ShoppingCartBadgeManager
 import com.intec.connect.utilities.animations.ReboundAnimator
 import com.stripe.android.PaymentConfiguration
-import com.stripe.android.paymentsheet.PaymentSheet
-import com.stripe.android.paymentsheet.PaymentSheetResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class CartActivity : AppCompatActivity(), DeleteModeListener {
@@ -44,16 +35,11 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
     private lateinit var shoppingCartAdapter: ShoppingCartAdapter
     private var isDeleteMode = false
     private var isShimmerShown = false
-    private lateinit var paymentSheet: PaymentSheet
-    private lateinit var customerId: String
-    private lateinit var ephemeralKey: String
-    private lateinit var clientSecretKey: String
-    private var apiInterface: ApiInterface = ApiUtilities.getApiInterface()
+
     private val badgeManager = ShoppingCartBadgeManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
         PaymentConfiguration.init(this, PUBLISHABLE_KEY)
 
         sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
@@ -62,7 +48,6 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
 
         binding = ActivityBagBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getCustomerId()
 
         binding.root.post {
             animateViewEntrance()
@@ -72,7 +57,6 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             finish()
         }
         binding.goToPay.setOnClickListener {
-            payFlow()
         }
 
         binding.deleteItem.setOnClickListener {
@@ -86,64 +70,6 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
         setupShoppingCartRecyclerView()
     }
 
-    private fun payFlow() {
-        paymentSheet.presentWithPaymentIntent(
-            clientSecretKey,
-            PaymentSheet.Configuration(
-                "Payment Method",
-                PaymentSheet.CustomerConfiguration(
-                    customerId, ephemeralKey
-                )
-            )
-        )
-    }
-
-    private fun getCustomerId() {
-        lifecycleScope.launch {
-            Dispatchers.IO
-
-            val res = apiInterface.getCustomer()
-            withContext(Dispatchers.Main) {
-                if (res.isSuccessful && res.body() != null) {
-                    customerId = res.body()!!.id
-                    getEphemeralKey(customerId)
-                }
-            }
-        }
-    }
-
-    private fun getEphemeralKey(id: String) {
-        lifecycleScope.launch {
-            Dispatchers.IO
-
-            val res = apiInterface.getEphemeralKey(id)
-            withContext(Dispatchers.Main) {
-                if (res.isSuccessful && res.body() != null) {
-                    ephemeralKey = res.body()!!.id
-//                    getPaymentIntent(id, ephemeralKey)
-                }
-            }
-        }
-    }
-
-    private fun getPaymentIntent(id: String, ephemeralKey: String) {
-        lifecycleScope.launch {
-            Dispatchers.IO
-            val res = apiInterface.getPaymentIntent(id)
-            withContext(Dispatchers.Main) {
-                if (res.isSuccessful && res.body() != null) {
-                    clientSecretKey = res.body()!!.id
-                    Toast.makeText(this@CartActivity, "Payment Intent Created", Toast.LENGTH_SHORT)
-                }
-            }
-        }
-    }
-
-    private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
-        if (paymentSheetResult is PaymentSheetResult.Completed) {
-            showErrorAlertDialog()
-        }
-    }
 
     private fun showErrorAlertDialog() {
         val dialogFragment = DialogFragmentCart.newInstance(
