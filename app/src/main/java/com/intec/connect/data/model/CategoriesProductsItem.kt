@@ -11,5 +11,6 @@ data class CategoriesProductsItem(
     @SerializedName("Products") val products: List<Product>,
     @SerializedName("UpdatedAt") val updatedAt: String,
     @SerializedName("UpdatedBy") val updatedBy: String,
-    @SerializedName("ImageURL") val imageURL: String
+    @SerializedName("ImageURL") val imageURL: String,
+    val icon: Int
 )

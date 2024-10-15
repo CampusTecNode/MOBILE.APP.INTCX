@@ -15,12 +15,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/image_category"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:backgroundTint="?android:attr/textColorPrimaryInverse"
             android:clickable="false"
             android:contentDescription="@null"
             android:contextClickable="false"

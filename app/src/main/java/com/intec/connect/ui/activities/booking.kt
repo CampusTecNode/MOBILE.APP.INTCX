@@ -1,20 +1,10 @@
 package com.intec.connect.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import com.intec.connect.R
-import com.intec.connect.ui.auth.LoginActivity
 
 class booking : AppCompatActivity() {
-    private val mainHandler = Handler(Looper.getMainLooper())
-
     /**
      * Called when the activity is starting.
      *
