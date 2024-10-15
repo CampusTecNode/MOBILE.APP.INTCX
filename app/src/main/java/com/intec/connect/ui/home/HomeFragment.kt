@@ -70,7 +70,8 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     private lateinit var keyboardVisibilityListener: BottomNavigationActivity.KeyboardVisibilityListener
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private var isShimmerShown = false // Flag to track if shimmer has been shown
+    private var isShimmerShown = false
+    private val badgeManager = ShoppingCartBadgeManager.getInstance()
 
     /**
      * Inflates the fragment's view and returns the root view.
@@ -115,6 +116,11 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
         setupSearchEditText()
         animateViewEntrance()
         setupAddFabClickListener()
+        loadShoppingCart()
+
+        badgeManager.badgeCount.observe(viewLifecycleOwner) { count ->
+            updateBadgeCount(count)
+        }
     }
 
     private fun setupAddFabClickListener() {
@@ -128,6 +134,7 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
             startActivity(intent, options.toBundle())
         }
     }
+
     /**
      * Sets up observers for the ViewModel's LiveData objects such as loading state,
      * categories, and products.
@@ -173,12 +180,6 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
                 }
             }
         }
-    }
-
-    private fun updateBadgeCount() {
-        val badgeCount = ShoppingCartBadgeManager.getInstance().getBadgeCount()
-        binding.bagBadge.text = badgeCount.toString()
-        binding.bagBadge.visibility = if (badgeCount > 0) View.VISIBLE else View.GONE
     }
 
     /**
@@ -462,16 +463,19 @@ class HomeFragment : Fragment(), BottomNavigationActivity.KeyboardVisibilityList
     override fun onResume() {
         super.onResume()
         homeViewModel.refreshProducts(userId, token)
-        loadShoppingCart()
     }
 
     private fun loadShoppingCart() {
         homeViewModel.shoppingCartByUser(userId, token).observe(viewLifecycleOwner) { result ->
             result.onSuccess { shoppingCart ->
                 val initialCount = shoppingCart.cartDetails.size
-                ShoppingCartBadgeManager.getInstance(initialCount)
-                updateBadgeCount()
+                badgeManager.setBadgeCount(initialCount)
             }
         }
+    }
+
+    private fun updateBadgeCount(itemCount: Int) {
+        binding.bagBadge.text = itemCount.toString()
+        binding.bagBadge.visibility = if (itemCount > 0) View.VISIBLE else View.GONE
     }
 }

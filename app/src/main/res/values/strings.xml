@@ -29,6 +29,7 @@
     <string name="logo">logo</string>
     <string name="accediendo">Accediendo…</string>
     <string name="invalid_credentials">El usuario o contraseña son incorrectos</string>
+    <string name="failed_email">Este correo no encuentra registrado</string>
     <string name="close">Cerrar</string>
     <string name="service_unavailable">En estos momentos no se puede acceder al servicio. Inténtelo más tarde.</string>
     <string name="no_internet_message">Para acceder debes tener activa la opción de datos y tener señal de la red o estar conectado vía Wi-Fi</string>

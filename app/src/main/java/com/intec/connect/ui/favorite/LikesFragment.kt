@@ -185,7 +185,9 @@ class LikesFragment : Fragment() {
      */
     private fun animateViewEntrance() {
         val viewsToAnimate = listOf(
-            binding.title
+            binding.title,
+            binding.emptyStage.productImage,
+            binding.emptyStage.productNameText
         )
 
         val reboundAnimator = ReboundAnimator(

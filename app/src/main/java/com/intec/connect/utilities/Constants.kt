@@ -6,4 +6,5 @@ object Constants {
     const val USERID_KEY = "user_id"
     const val SALT = "cGFzc3dvcmQtc2FsdC0xMjM0NTY3ODk="
     const val PRODUCT_ID = "product_id"
+    val HEX_ARRAY = "0123456789ABCDEF".toCharArray()
 }

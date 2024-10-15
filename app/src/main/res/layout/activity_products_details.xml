@@ -8,6 +8,24 @@
     tools:context=".ui.detailsProducts.ProductDetailActivity">
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
+            app:lottie_rawRes="@raw/like" />
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/shimmer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -105,7 +123,6 @@
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             android:layout_marginTop="56dp"
-            android:src="@drawable/profile_image_holder"
             app:shapeAppearanceOverlay="@style/ImageStyle_Circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

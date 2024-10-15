@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.intec.connect.R
 import com.intec.connect.data.model.CartDetail
+import com.intec.connect.data.model.ShoppingCartByUser
 import com.intec.connect.interfaces.ClickListener
 import com.intec.connect.interfaces.DeleteModeListener
 import com.intec.connect.ui.holders.ShoppingViewHolder
@@ -20,15 +21,15 @@ class ShoppingCartAdapter(
     private val clickListener: ClickListener<CartDetail>,
     private val context: Activity?,
     private val recyclerView: RecyclerView,
-    private val onDeleteClickListener: (CartDetail) -> Unit,
+    private val onDeleteClickListener: (carID: Int, CartDetail) -> Unit,
     private var isDeleteMode: Boolean,
     private val deleteModeListener: DeleteModeListener
 ) : RecyclerView.Adapter<ShoppingViewHolder>() {
     private var animatorViewHelper: ListViewAnimatorHelper? = null
     private var reboundAnimatorManager: ReboundAnimator? = null
-    private val shoppingCartItems = mutableListOf<CartDetail>()
+    private val shoppingCartItems = mutableListOf<ShoppingCartByUser>()
+    private val allCartDetails = mutableListOf<CartDetail>()
 
-    private val selectedItems = mutableListOf<Int>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
         val layout = LayoutInflater.from(parent.context)
             .inflate(R.layout.shopping_cart_adapter_item, parent, false)
@@ -61,10 +62,9 @@ class ShoppingCartAdapter(
 
 
     override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
-        val shoppingCart = shoppingCartItems[position]
+        val shoppingCart = allCartDetails[position]
         holder.item = shoppingCart
 
-        val itemId = shoppingCartItems[position].product.id
 
         holder.productName.text = shoppingCart.product.name
         holder.productDescription.text = shoppingCart.product.brand
@@ -73,10 +73,30 @@ class ShoppingCartAdapter(
 
         holder.productCheckbox.setOnClickListener {
             if (deleteModeListener.isDeleteMode()) {
-                onDeleteClickListener(shoppingCartItems[position])
+                val cartDetail = allCartDetails[position]
+
+                var cartId = -1
+                var shoppingCartToUpdate: ShoppingCartByUser? = null
+                for (shoppingCarts in shoppingCartItems) {
+                    if (shoppingCarts.cartDetails.contains(cartDetail)) {
+                        cartId = shoppingCarts.cartId
+                        shoppingCartToUpdate = shoppingCarts
+                        break
+                    }
+                }
+
+                onDeleteClickListener(cartId, cartDetail)
+
+                allCartDetails.removeAt(position)
+                notifyItemRemoved(position)
+
+                if (shoppingCartToUpdate != null) {
+                    val cartDetails = shoppingCartToUpdate.cartDetails.toMutableList()
+                    cartDetails.remove(cartDetail)
+                    shoppingCartToUpdate.cartDetails = cartDetails
+                }
             }
         }
-
 
         if (shoppingCart.product.imageURL.isNotEmpty()) {
             context?.let {
@@ -88,18 +108,23 @@ class ShoppingCartAdapter(
             holder.productImage.setBackgroundResource(R.drawable.fastfood_24dp)
         }
 
-
         val animators: Array<Animator> =
             reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView.rootView)
 
         animatorViewHelper!!.animateViewIfNecessary(position, holder.itemView, animators)
     }
 
-    override fun getItemCount(): Int = shoppingCartItems.size
+    override fun getItemCount(): Int = allCartDetails.size
 
-    fun updateShoppingCart(shoppingCart: List<CartDetail>) {
+    fun updateShoppingCart(shoppingCart: List<ShoppingCartByUser>) {
         this.shoppingCartItems.clear()
         this.shoppingCartItems.addAll(shoppingCart)
+
+        allCartDetails.clear()
+        for (cart in shoppingCartItems) {
+            allCartDetails.addAll(cart.cartDetails)
+        }
+
         notifyDataSetChanged()
     }
 
