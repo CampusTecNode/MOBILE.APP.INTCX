@@ -20,6 +20,7 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="tickColorActive">@color/search_color_dark</item>
         <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
+        <item name="textColorDetail">@color/text_description</item>
 
     </style>
 
@@ -56,6 +57,7 @@
         <item name="android:textColorSecondary">@color/text_color_dark</item>
         <item name="android:windowBackground">@color/app_background_dark</item>
         <item name="backgroundColor">@color/dark_background_color_adapter_item</item>
+        <item name="textColorDetail">@color/text_description</item>
 
         <item name="bottomAppBarColor">@color/dark_background_color_adapter_item</item>
 
@@ -106,6 +108,7 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:colorSecondary">@color/dark_background_color_adapter_item</item>
+        <item name="textColorDetail">@color/text_description</item>
 
     </style>
 

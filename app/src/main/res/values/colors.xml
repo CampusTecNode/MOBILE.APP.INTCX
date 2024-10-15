@@ -7,12 +7,11 @@
     <color name="hint_color">#B4B3B3</color>
     <color name="hint_color_dark">#707B81</color>
     <color name="light_gray">#DDD6D6</color>
-
     <color name="primary_color">#E4002B</color>
     <color name="text_color_dark">#FFFFFF</color>
     <color name="text_color_light">#1A2530</color>
 
-    <color name="app_background_light">#F8F9FA</color>
+    <color name="app_background_light">#f6f6f7</color>
     <color name="app_background_dark">#1A2530</color>
 
     <color name="default_icon_color">#808080</color>
@@ -32,9 +31,7 @@
     <color name="edit_text_color_light">#FFFFFF</color>
     <color name="badge_color">#F87265</color>
 
-
     <color name="text_description">#C2C0C0</color>
     <color name="text_description_details">#868686</color>
-
 
 </resources>

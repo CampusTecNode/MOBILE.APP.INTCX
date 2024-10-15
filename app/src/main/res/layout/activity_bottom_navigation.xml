@@ -29,9 +29,8 @@
         app:backgroundTint="?attr/bottomAppBarColor"
         app:contentInsetStart="0dp"
         app:fabAlignmentMode="center"
-        app:fabCradleMargin="8dp"
+        app:fabCradleMargin="6dp"
         app:elevation="5dp"
-        app:fabCradleRoundedCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

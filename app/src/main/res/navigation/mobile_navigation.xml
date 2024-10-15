@@ -59,5 +59,15 @@
         android:name="com.intec.connect.ui.activities.ResetPassword"
         android:label="activity_reset_passaword"
         tools:layout="@layout/activity_reset_passaword" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.intec.connect.bookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
+    <fragment
+        android:id="@+id/bookingSpecificType"
+        android:name="com.intec.connect.bookingSpecificType"
+        android:label="fragment_booking_specific_type"
+        tools:layout="@layout/fragment_booking_specific_type" />
 
 </navigation>
