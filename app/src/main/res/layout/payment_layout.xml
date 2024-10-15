@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/paymentMethodTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose a payment method"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Métodos de pago con ConstraintLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/paymentMethodOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodTitle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Opción de pago con tarjeta -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardPaymentOption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:paddingEnd="50dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/rounded_card_view_item_adapter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+                <!-- Ícono de tarjeta -->
+            <ImageView
+                android:id="@+id/cardIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_credit_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Texto de la opción de tarjeta -->
+            <TextView
+                android:id="@+id/cardPaymentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Card"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/cardIcon"
+                app:layout_constraintTop_toBottomOf="@+id/cardIcon" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Aquí puedes agregar más métodos de pago -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Información de la tarjeta -->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodOptions">
+
+        <EditText
+            android:id="@+id/cardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Card number"
+            android:inputType="number"
+            android:padding="12dp" />
+
+        <LinearLayout
+            android:id="@+id/layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cardExpiryDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext"
+                android:hint="MM / YY"
+                android:inputType="date"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/cardCVC"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext"
+                android:hint="CVC"
+                android:inputType="number"
+                android:padding="12dp" />
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/zipCodeInput"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:hint="ZIP code"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout4"
+            tools:layout_editor_absoluteX="17dp" />
+
+    </LinearLayout>
+
+
+
+    <!-- Checkbox para guardar la tarjeta -->
+    <CheckBox
+        android:id="@+id/saveCardCheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save this card for future payments"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+
+    <!-- Botón para continuar -->
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
