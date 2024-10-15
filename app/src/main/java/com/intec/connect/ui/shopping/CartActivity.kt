@@ -24,6 +24,7 @@ import com.intec.connect.ui.adapters.ShoppingCartAdapter
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.DialogFragmentCart
+import com.intec.connect.utilities.ShoppingCartBadgeManager
 import com.intec.connect.utilities.animations.ReboundAnimator
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
@@ -42,12 +43,13 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
     private lateinit var token: String
     private lateinit var shoppingCartAdapter: ShoppingCartAdapter
     private var isDeleteMode = false
-    private var isShimmerShown = false // Flag to track if shimmer has been shown
-    lateinit var paymentSheet: PaymentSheet
-    lateinit var customerId: String
-    lateinit var ephemeralKey: String
-    lateinit var clientSecretKey: String
+    private var isShimmerShown = false
+    private lateinit var paymentSheet: PaymentSheet
+    private lateinit var customerId: String
+    private lateinit var ephemeralKey: String
+    private lateinit var clientSecretKey: String
     private var apiInterface: ApiInterface = ApiUtilities.getApiInterface()
+    private val badgeManager = ShoppingCartBadgeManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,7 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
 
         binding = ActivityBagBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getCustomerId()
 
         binding.root.post {
             animateViewEntrance()
@@ -81,7 +84,6 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
 
         setupObservers()
         setupShoppingCartRecyclerView()
-
     }
 
     private fun payFlow() {
@@ -95,7 +97,6 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             )
         )
     }
-
 
     private fun getCustomerId() {
         lifecycleScope.launch {
@@ -115,25 +116,24 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
         lifecycleScope.launch {
             Dispatchers.IO
 
-            val res = apiInterface.getEphemeralKey(customer = id)
+            val res = apiInterface.getEphemeralKey(id)
             withContext(Dispatchers.Main) {
                 if (res.isSuccessful && res.body() != null) {
                     ephemeralKey = res.body()!!.id
-                    getPaymentIntent(id, ephemeralKey)
+//                    getPaymentIntent(id, ephemeralKey)
                 }
             }
         }
     }
 
     private fun getPaymentIntent(id: String, ephemeralKey: String) {
-
         lifecycleScope.launch {
             Dispatchers.IO
-
-            val res = apiInterface.getPaymentIntent(customer = id)
+            val res = apiInterface.getPaymentIntent(id)
             withContext(Dispatchers.Main) {
                 if (res.isSuccessful && res.body() != null) {
                     clientSecretKey = res.body()!!.id
+                    Toast.makeText(this@CartActivity, "Payment Intent Created", Toast.LENGTH_SHORT)
                 }
             }
         }
@@ -159,17 +159,33 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
 
         shoppingViewModel.shoppingCartByUser(userId, token).observe(this) { result ->
             result.onSuccess { shoppingCart ->
-                shoppingCartAdapter.updateShoppingCart(shoppingCart.cartDetails) // Assuming one cart per user
-                // Calculate and display the total price
-                val totalPrice = calculateTotalPrice(shoppingCart.cartDetails)
-                binding.productPriceText.text = totalPrice.toString()
+                shoppingCartAdapter.updateShoppingCart(listOf(shoppingCart))
+
+                if (shoppingCart.cartDetails.isNotEmpty()) {
+                    val totalPrice = calculateTotalPrice(shoppingCart.cartDetails)
+                    binding.productPriceText.text = totalPrice.toString()
+                }
             }
             result.onFailure { error ->
                 // Handle the error, e.g., show an error message to the user
-                Toast.makeText(this, "Error loading shopping cart", Toast.LENGTH_SHORT).show()
                 Log.e("CartActivity", "Error loading shopping cart", error)
             }
         }
+    }
+
+    /**
+     * Displays an empty state if no products are found.
+     *
+     */
+    private fun showEmptyStateIfNoProducts() {
+        if (shoppingCartAdapter.itemCount == 0) {
+            binding.emptyStage.visibility = View.VISIBLE
+            binding.shoppingCartRecyclerView.visibility = View.GONE
+        } else {
+            binding.emptyStage.visibility = View.GONE
+            binding.shoppingCartRecyclerView.visibility = View.VISIBLE
+        }
+
     }
 
     private fun calculateTotalPrice(cartDetails: List<CartDetail>): Double {
@@ -190,19 +206,30 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             override fun onClick(view: View, item: CartDetail, position: Int) {
 
             }
-        }, this, binding.shoppingCartRecyclerView, onDeleteClickListener = { cartDetail ->
+        }, this, binding.shoppingCartRecyclerView, onDeleteClickListener = { cartId, cartDetail ->
             shoppingViewModel.deleteShoppingCartItem(
-                cartDetail.id,
+                cartId,
                 cartDetail.product.id,
-                userId,
                 token
             )
+
+            badgeManager.decrementBadgeCount()
+
         }, isDeleteMode, this)
 
         binding.shoppingCartRecyclerView.adapter = shoppingCartAdapter
 
-    }
+        shoppingCartAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                showEmptyStateIfNoProducts()
+            }
 
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                showEmptyStateIfNoProducts()
+            }
+        })
+    }
 
     /**
      * Displays or hides the loading animation based on the loading state.
@@ -227,6 +254,10 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             binding.backArrow,
             binding.deleteItem,
             binding.amountBalance,
+            binding.productPriceText,
+            binding.symbolMoney,
+            binding.productImage,
+            binding.productNameText,
             binding.productPriceContainer,
             binding.goToPay,
             binding.title
@@ -262,5 +293,14 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
 
     override fun isDeleteMode(): Boolean {
         return isDeleteMode
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        shoppingViewModel.shoppingCartByUser(userId, token).removeObservers(this)
+    }
+
+    private fun updateBadgeCount(count: Int) {
+        // No es necesario hacer nada aquí
     }
 }

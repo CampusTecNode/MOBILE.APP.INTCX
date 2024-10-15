@@ -10,13 +10,12 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-
     @Headers("Authorization: Bearer $SECRET_KEY")
     @POST("v1/customers")
     suspend fun getCustomer(): Response<CustomerModel>
 
     @Headers(
-        "Authorization: Bearer §SECRET_KEY",
+        "Authorization: Bearer $SECRET_KEY",
         "Stripe-Version: 2022-11-15"
     )
     @POST("v1/ephemeral_keys")
@@ -31,6 +30,6 @@ interface ApiInterface {
         @Query("customer") customer: String,
         @Query("amount") amount: String = "100",
         @Query("currency") currency: String = "inr",
-        @Query("automatic_payment_methods[enable]") automatePay: Boolean = true,
+        @Query("automatic_payment_methods[enable]") automatePay: Boolean = true
     ): Response<PaymentModel>
 }

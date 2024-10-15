@@ -4,10 +4,10 @@ import android.util.Log
 import com.intec.connect.api.RetrofitApiClient
 import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
-import com.intec.connect.data.model.DeleteShoppingCartBody
 import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
 import com.intec.connect.data.model.Product
+import com.intec.connect.data.model.SendResetPassword
 import com.intec.connect.data.model.ShoppingCartBody
 import com.intec.connect.data.model.ShoppingCartByUser
 import com.intec.connect.data.model.UnlikeRequest
@@ -33,6 +33,11 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
 
         return handleResponse(response)
     }
+
+    suspend fun sendResetPasswordRequest(sendResetPassword: SendResetPassword) {
+        userAPI.sendResetPasswordRequest(sendResetPassword)
+    }
+
 
     /**
      * Retrieves categories and their products.
@@ -111,11 +116,15 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
     }
 
     suspend fun deleteShoppingCartItem(
-        id: String,
         token: String,
-        deleteShoppingCartBody: DeleteShoppingCartBody
+        cartId: Int,
+        productId: Int
     ) {
-        userAPI.deleteShoppingCartItem(id, token, deleteShoppingCartBody)
+        userAPI.deleteShoppingCartItem(
+            cartId,
+            productId,
+            token
+        )
     }
 
 }

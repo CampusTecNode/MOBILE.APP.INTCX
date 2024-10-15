@@ -1,9 +1,12 @@
 package com.intec.connect.utilities
 
+import android.animation.Animator
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.DialogFragment
@@ -31,6 +34,20 @@ class DialogFragmentCart : DialogFragment() {
         messageTextView.text = message
         lottieAnimationView.setAnimation(lottieRawRes)
 
+        lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationEnd(animation: Animator) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dismiss()
+                }, 600)
+
+            }
+        })
+
+        lottieAnimationView.playAnimation()
+
         closeButton.setOnClickListener {
             requireActivity().finish()
         }
@@ -40,6 +57,7 @@ class DialogFragmentCart : DialogFragment() {
         }
 
         builder.setView(view)
+        builder.setCancelable(false)
         return builder.create()
     }
 

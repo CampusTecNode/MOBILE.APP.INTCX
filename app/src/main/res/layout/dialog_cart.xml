@@ -16,8 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_loop="false"
-        app:lottie_rawRes="@raw/add_cart" />
+        app:lottie_loop="false" />
 
     <TextView
         android:id="@+id/dialog_message_cart"
@@ -63,6 +62,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center|end"
+            android:visibility="gone"
             android:text="@string/close"
             android:textColor="@color/primary_color"
             android:textSize="14sp"

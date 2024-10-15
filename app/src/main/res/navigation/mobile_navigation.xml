@@ -44,10 +44,20 @@
             android:id="@+id/action_navigation_profile_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+
     <fragment
         android:id="@+id/allProductsFragment"
         android:name="com.intec.connect.ui.allproducts.AllProductsFragment"
         android:label="fragment_all_products_list"
-        tools:layout="@layout/fragment_all_products_list"></fragment>
+        tools:layout="@layout/fragment_all_products_list">
+        <deepLink app:uri="https://example.com/reset-password?token={token}" />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/resetPassword"
+        android:name="com.intec.connect.ui.activities.ResetPassword"
+        android:label="activity_reset_passaword"
+        tools:layout="@layout/activity_reset_passaword" />
 
 </navigation>

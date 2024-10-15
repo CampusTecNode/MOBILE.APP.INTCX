@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.common.api.ApiException
-import com.intec.connect.data.model.DeleteShoppingCartBody
 import com.intec.connect.data.model.ShoppingCartByUser
 import com.intec.connect.repository.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,14 +40,12 @@ class ShoppingViewModel @Inject constructor(private val repository: RetrofitRepo
     fun deleteShoppingCartItem(
         cartId: Int,
         productId: Int,
-        id: String,
         token: String
     ): LiveData<Result<Boolean>> {
         val result = MutableLiveData<Result<Boolean>>()
         viewModelScope.launch {
             try {
-                val request = DeleteShoppingCartBody(cartId, productId)
-                repository.deleteShoppingCartItem(id, token, request)
+                repository.deleteShoppingCartItem(token, cartId, productId)
                 result.value = Result.success(true) // Success
             } catch (e: Exception) {
                 result.value = Result.failure(e) // Failure

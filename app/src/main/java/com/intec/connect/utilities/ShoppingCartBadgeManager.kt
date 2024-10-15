@@ -1,25 +1,26 @@
 package com.intec.connect.utilities
 
-class ShoppingCartBadgeManager private constructor(private val initialCount: Int = 0) {
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
-    private var badgeCount = initialCount
+class ShoppingCartBadgeManager private constructor(initialCount: Int = 0) {
+
+    private val _badgeCount = MutableLiveData(initialCount)
+    val badgeCount: LiveData<Int> = _badgeCount
 
     fun incrementBadgeCount() {
-        badgeCount++
+        _badgeCount.value = (_badgeCount.value ?: 0) + 1
     }
 
     fun decrementBadgeCount() {
-        if (badgeCount > 0) {
-            badgeCount--
+        val currentCount = _badgeCount.value ?: 0
+        if (currentCount > 0) {
+            _badgeCount.value = currentCount - 1
         }
     }
 
     fun setBadgeCount(count: Int) {
-        badgeCount = count
-    }
-
-    fun getBadgeCount(): Int {
-        return badgeCount
+        _badgeCount.value = count
     }
 
     companion object {

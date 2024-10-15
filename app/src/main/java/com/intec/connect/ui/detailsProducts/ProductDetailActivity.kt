@@ -2,8 +2,11 @@ package com.intec.connect.ui.detailsProducts
 
 import android.animation.AnimatorSet
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
@@ -11,9 +14,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.bumptech.glide.Glide
 import com.intec.connect.R
 import com.intec.connect.databinding.ActivityProductsDetailsBinding
+import com.intec.connect.ui.shopping.CartActivity
 import com.intec.connect.utilities.Constants
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
@@ -35,6 +40,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private var originalPrice = 0.0
     private var isLiked = false
     private var count = 1
+    private val badgeManager = ShoppingCartBadgeManager.getInstance()
 
     private val sharedViewModel: SharedViewModel by viewModels()
 
@@ -49,10 +55,17 @@ class ProductDetailActivity : AppCompatActivity() {
         userId = sharedPrefs.getString(USERID_KEY, "")!!
 
         setContentView(binding.root)
-        updateBadgeCount()
 
         setupObservers()
         setupCounter()
+
+        binding.bagContainer.setOnClickListener {
+            setupAddFabClickListener()
+        }
+
+        badgeManager.badgeCount.observe(this) { count ->
+            updateBadgeCount(count)
+        }
 
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -74,20 +87,23 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.favoriteButton.setOnClickListener {
-            updateFavoriteButtonAppearance(!isLiked)
+            isLiked = !isLiked
 
             if (isLiked) {
+                productsDetailViewModel.likeProduct(userId, productId, token)
+                    .observe(this) { result ->
+                        result.onSuccess {
+                            playLottieAnimation()
+                            sharedViewModel.refreshHomeData(userId, token)
+                            updateFavoriteButtonAppearance(isLiked)
+                        }
+                    }
+            } else {
                 productsDetailViewModel.unlikeProduct(userId, productId, token)
                     .observe(this) { result ->
                         result.onSuccess {
                             sharedViewModel.refreshHomeData(userId, token)
-                        }
-                    }
-            } else {
-                productsDetailViewModel.likeProduct(userId, productId, token)
-                    .observe(this) { result ->
-                        result.onSuccess {
-                            sharedViewModel.refreshHomeData(userId, token)
+                            updateFavoriteButtonAppearance(isLiked)
                         }
                     }
             }
@@ -99,29 +115,10 @@ class ProductDetailActivity : AppCompatActivity() {
                     result.onSuccess {
                         productsDetailViewModel.shoppingCartByUser(userId, token)
                             .observe(this) { result ->
-                                result.onSuccess {
-
-                                }
-                            }
-                    }
-                }
-        }
-
-        binding.constraintLayout6.setOnClickListener {
-            productsDetailViewModel.shoppingCart(userId, productId, count, token)
-                .observe(this) { result ->
-                    result.onSuccess {
-                        productsDetailViewModel.shoppingCartByUser(userId, token)
-                            .observe(this) { result ->
-                                result.onSuccess { shoppingCart ->
+                                result.onSuccess { _ ->
                                     showErrorAlertDialog()
 
-                                    val newCartSize = shoppingCart.cartDetails.size
-
-                                    val badgeManager = ShoppingCartBadgeManager.getInstance()
-                                    badgeManager.setBadgeCount(newCartSize)
-
-                                    updateBadgeCount()
+                                    badgeManager.incrementBadgeCount()
                                     resetProductDetails()
                                 }
                             }
@@ -130,17 +127,34 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun showErrorAlertDialog() {
-        val dialogFragment = DialogFragmentCart.newInstance(
-            "Producto agregado.", R.raw.add_cart
-        )
-        dialogFragment.show(supportFragmentManager, "error_dialog")
+    private fun setupAddFabClickListener() {
+        binding.bagContainer.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+                this,
+                R.anim.activity_transition_from_right,
+                R.anim.activity_transition_stay_visible
+            )
+            startActivity(intent, options.toBundle())
+        }
     }
 
-    private fun updateBadgeCount() {
-        val badgeCount = ShoppingCartBadgeManager.getInstance().getBadgeCount()
-        binding.bagBadge.text = badgeCount.toString()
-        binding.bagBadge.visibility = if (badgeCount > 0) View.VISIBLE else View.GONE
+    private fun playLottieAnimation() {
+        binding.lottieAnimationView.visibility = View.VISIBLE
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.lottieAnimationView.visibility = View.GONE
+        }, 800)
+
+        binding.lottieAnimationView.playAnimation()
+    }
+
+
+    private fun showErrorAlertDialog() {
+        val dialogFragment = DialogFragmentCart.newInstance(
+            "Producto agregado al carrito.", R.raw.add_cart
+        )
+        dialogFragment.show(supportFragmentManager, "error_dialog")
     }
 
     private fun setupCounter() {
@@ -198,6 +212,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                 .into(binding.productImage)
 
                             isLiked = product.liked
+
                             updateFavoriteButtonAppearance(isLiked)
 
                             binding.productPriceText.text = product.price
@@ -228,7 +243,6 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun updateFavoriteButtonAppearance(isLiked: Boolean) {
-
         if (isLiked) {
             binding.favoriteButton.setImageResource(R.drawable.favorite_24dp_fill_red)
         } else {
@@ -300,5 +314,10 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         productsDetailViewModel.getProductsDetail(-1, "", "").removeObservers(this)
+    }
+
+    private fun updateBadgeCount(count: Int) {
+        binding.bagBadge.text = count.toString()
+        binding.bagBadge.visibility = if (count > 0) View.VISIBLE else View.GONE
     }
 }
