@@ -6,12 +6,14 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.intec.connect.R
 import com.intec.connect.api.stripe.ApiInterface
 import com.intec.connect.api.stripe.ApiUtilities
@@ -24,6 +26,7 @@ import com.intec.connect.ui.adapters.ShoppingCartAdapter
 import com.intec.connect.utilities.Constants.TOKEN_KEY
 import com.intec.connect.utilities.Constants.USERID_KEY
 import com.intec.connect.utilities.DialogFragmentCart
+import com.intec.connect.utilities.PayDialog
 import com.intec.connect.utilities.ShoppingCartBadgeManager
 import com.intec.connect.utilities.animations.ReboundAnimator
 import com.stripe.android.PaymentConfiguration
@@ -60,6 +63,8 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
         token = sharedPrefs.getString(TOKEN_KEY, "")!!
         userId = sharedPrefs.getString(USERID_KEY, "")!!
 
+
+
         binding = ActivityBagBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getCustomerId()
@@ -72,7 +77,15 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             finish()
         }
         binding.goToPay.setOnClickListener {
-            payFlow()
+            val view: View = layoutInflater.inflate(R.layout.payment_layout, null)
+            val dialog = BottomSheetDialog(this)
+            dialog.setContentView(view)
+            dialog.show()
+            val PayButtom: Button = view.findViewById(R.id.continueButton)
+            PayButtom.setOnClickListener{
+                ShowDialog()
+            }
+//            payFlow()
         }
 
         binding.deleteItem.setOnClickListener {
@@ -85,18 +98,14 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
         setupObservers()
         setupShoppingCartRecyclerView()
     }
-
-    private fun payFlow() {
-        paymentSheet.presentWithPaymentIntent(
-            clientSecretKey,
-            PaymentSheet.Configuration(
-                "Payment Method",
-                PaymentSheet.CustomerConfiguration(
-                    customerId, ephemeralKey
-                )
-            )
+    fun ShowDialog() {
+        val dialogFragment = PayDialog.newInstance(
+            "Pago realizado.", R.raw.add_cart
         )
+        dialogFragment.show(supportFragmentManager, "error_dialog")
     }
+
+
 
     private fun getCustomerId() {
         lifecycleScope.launch {
@@ -111,6 +120,7 @@ class CartActivity : AppCompatActivity(), DeleteModeListener {
             }
         }
     }
+
 
     private fun getEphemeralKey(id: String) {
         lifecycleScope.launch {
