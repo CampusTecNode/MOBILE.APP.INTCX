@@ -72,18 +72,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
 
-            <!--            <intent-filter android:autoVerify="true">-->
-            <!--                <action android:name="android.intent.action.VIEW" />-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
 
-            <!--                <category android:name="android.intent.category.DEFAULT"-->
-            <!--                />-->
-            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-            <!--                <data android:scheme="https" />-->
-            <!--                <data android:host="web-api-intcx.onrender.com"-->
-            <!--                />-->
-            <!--                <data android:pathPrefix="/reset-password" />-->
-            <!--            </intent-filter>-->
+                <data android:scheme="https" />
+                <data android:host="web-api-intcx.onrender.com" />
+                <data android:pathPrefix="/reset-password" />
+            </intent-filter>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

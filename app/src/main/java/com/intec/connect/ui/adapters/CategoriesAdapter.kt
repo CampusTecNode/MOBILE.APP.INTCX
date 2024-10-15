@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.intec.connect.R
 import com.intec.connect.data.model.CategoriesProductsItem
 import com.intec.connect.interfaces.ClickListener
@@ -51,8 +50,7 @@ class CategoriesAdapter(
      * @param parent The ViewGroup into which the new View will be added after it is bound to
      *               an adapter position.
      * @param viewType The view type of the new View.
-     * @return A new ViewHolder that holds a View of the given view
-    type.
+     * @return A new ViewHolder that holds a View of the given view type.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -87,20 +85,25 @@ class CategoriesAdapter(
         holder:
         CategoryViewHolder, position: Int
     ) {
-        val categoriesProductsItem = categoriesProducts[position]
+        val category = categoriesProducts[position]
 
-        holder.categoryTitle.text = categoriesProductsItem.name
+        holder.categoryTitle.text = category.name
 
-        holder.item = categoriesProductsItem
+        holder.item = category
 
-        holder.categoryTitle.text = categoriesProductsItem.name
-        categoriesProductsItem.imageURL
+        holder.categoryTitle.text = category.name
 
-        context?.let {
-            Glide.with(it)
-                .load(categoriesProductsItem.imageURL)
-                .into(holder.categoryImage)
+        val icon = when (category.id) {
+            1 -> R.drawable.ic_stationery_compas
+            2 -> R.drawable.ic_chips_snack
+            3 -> R.drawable.ic_iced_coffee
+            4 -> R.drawable.ic_pc
+            5 -> R.drawable.ic_back_bag_education
+            6 -> R.drawable.ic_calculator
+            else -> R.drawable.default_icon
         }
+
+        holder.categoryImage.setImageResource(icon)
 
         if (position == selectedCategoryIndex) {
             holder.itemView.isSelected = true

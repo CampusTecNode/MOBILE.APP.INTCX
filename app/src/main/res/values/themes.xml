@@ -9,7 +9,7 @@
         <item name="android:editTextBackground">@color/edit_text_color_light</item>
         <item name="android:textColorSecondary">@color/text_color_light</item>
         <item name="android:windowBackground">@color/app_background_light</item>
-        <item name="android:navigationBarColor">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@color/white</item>
         <item name="bottomAppBarColor">@color/white</item>
         <item name="android:statusBarColor">@color/app_background_light</item>
         <item name="tickColorActive">@color/search_color</item>
@@ -17,8 +17,8 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:colorSecondary">@color/white</item>
+        <item name="textColorDetail">@color/text_description</item>
     </style>
-
 
     <style name="Base.Theme.IntecConnect.Products.Details" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
@@ -29,7 +29,7 @@
         <item name="android:editTextBackground">@color/edit_text_color_light</item>
         <item name="android:textColorSecondary">@color/text_color_light</item>
         <item name="android:windowBackground">@color/app_background_light</item>
-        <item name="android:navigationBarColor">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@color/white</item>
         <item name="bottomAppBarColor">@color/white</item>
         <item name="android:statusBarColor">@color/app_background_light</item>
         <item name="tickColorActive">@color/search_color</item>
@@ -57,6 +57,7 @@
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:colorSecondary">@color/white</item>
+        <item name="textColorDetail">@color/text_description</item>
     </style>
 
     <style name="Base.Theme.IntecConnect.Fragments.view" parent="Theme.Material3.DayNight.NoActionBar">
@@ -74,9 +75,10 @@
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:colorSecondary">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/app_background_light</item>
+        <item name="android:navigationBarColor">@color/white</item>
         <item name="android:statusBarColor">@color/app_background_light</item>
         <item name="android:textColorPrimaryInverse">@color/primary_color</item>
+        <item name="textColorDetail">@color/text_description</item>
 
     </style>
 
@@ -98,6 +100,7 @@
         <item name="android:colorSecondary">@color/white</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="textColorDetail">@color/text_description</item>
     </style>
 
     <style name="Theme.IntecConnect" parent="Base.Theme.IntecConnect" />
