@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.intec.connect.R
 import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
 import com.intec.connect.interfaces.LikeClickListener
 import com.intec.connect.ui.holders.CategoryProductViewHolder
+import com.intec.connect.utilities.DoubleClickHelper
 import com.intec.connect.utilities.animations.ListViewAnimatorHelper
 import com.intec.connect.utilities.animations.ReboundAnimator
 
@@ -27,6 +29,8 @@ class AllProductAdapter(
     private val products = mutableListOf<Product>()
     private var originalProductList: List<Product> = listOf()
     private var filteredProductList: List<Product> = listOf()
+    private val doubleClickHelper =
+        DoubleClickHelper<Product, CategoryProductViewHolder>(likeClickListener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryProductViewHolder {
         val layout =
@@ -59,14 +63,21 @@ class AllProductAdapter(
 
         holder.updateFavoriteButtonAppearance(product.liked)
 
-        if (product.imageURL.isNotEmpty()) {
             context?.let {
                 Glide.with(it)
                     .load(product.imageURL)
+                    .transform(RoundedCorners(8))
                     .into(holder.productImage)
             }
-        } else {
-            holder.productImage.setImageResource(R.drawable.mascotas)
+
+        holder.itemView.setOnClickListener { view ->
+            doubleClickHelper.handleDoubleClick(
+                view,
+                holder,
+                product,
+                position,
+                clickListener
+            )
         }
 
         val animators: Array<Animator> =

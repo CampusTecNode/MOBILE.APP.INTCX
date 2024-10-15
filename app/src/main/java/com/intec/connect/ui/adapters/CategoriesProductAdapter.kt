@@ -12,6 +12,7 @@ import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
 import com.intec.connect.interfaces.LikeClickListener
 import com.intec.connect.ui.holders.CategoryProductViewHolder
+import com.intec.connect.utilities.DoubleClickHelper
 import com.intec.connect.utilities.animations.ListViewAnimatorHelper
 import com.intec.connect.utilities.animations.ReboundAnimator
 
@@ -38,6 +39,8 @@ class CategoriesProductAdapter(
     private val categoriesProducts = mutableListOf<Product>()
     private var originalProductList: List<Product> = listOf()
     private var filteredProductList: List<Product> = listOf()
+    private val doubleClickHelper =
+        DoubleClickHelper<Product, CategoryProductViewHolder>(likeClickListener)
 
     /**
      * Called when RecyclerView needs a new [CategoryProductViewHolder] of the given type to represent
@@ -90,14 +93,10 @@ class CategoriesProductAdapter(
         holder.isLiked = product.liked
         holder.updateFavoriteButtonAppearance(product.liked)
 
-        if (product.imageURL.isNotEmpty()) {
             context?.let {
                 Glide.with(it)
                     .load(product.imageURL)
                     .into(holder.productImage)
-            }
-        } else {
-            holder.productImage.setImageResource(R.drawable.mascotas)
         }
 
 
@@ -105,6 +104,16 @@ class CategoriesProductAdapter(
             reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView.rootView)
 
         animatorViewHelper!!.animateViewIfNecessary(position, holder.itemView, animators)
+
+        holder.itemView.setOnClickListener { view ->
+            doubleClickHelper.handleDoubleClick(
+                view,
+                holder,
+                product,
+                position,
+                clickListener
+            )
+        }
     }
 
     /**

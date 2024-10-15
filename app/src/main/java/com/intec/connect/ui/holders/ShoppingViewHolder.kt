@@ -1,7 +1,7 @@
 package com.intec.connect.ui.holders
 
 import android.view.View
-import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +29,7 @@ class ShoppingViewHolder(
     var productDescription: TextView = itemView.findViewById(R.id.product_description_text)
     var productPrice: TextView = itemView.findViewById(R.id.product_price_text)
     var productQuantity: TextView = itemView.findViewById(R.id.quantity)
-    var productCheckbox: CheckBox = itemView.findViewById(R.id.checkbox)
+    var productCheckbox: ImageButton = itemView.findViewById(R.id.checkbox)
 
     private val clickListener = listener
 

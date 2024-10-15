@@ -2,9 +2,9 @@ package com.intec.connect.ui.holders
 
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import com.intec.connect.R
 import com.intec.connect.data.model.Product
 import com.intec.connect.interfaces.ClickListener
@@ -26,7 +26,7 @@ class LikesViewHolder(
 
     var item: Product? = null
 
-    var productImage: ImageView = itemView.findViewById(R.id.product_image)
+    var productImage: ShapeableImageView = itemView.findViewById(R.id.product_image)
     private var favoriteButton: ImageButton = itemView.findViewById(R.id.favorite_button)
     var productDescription: TextView = itemView.findViewById(R.id.product_description_text)
     var productName: TextView = itemView.findViewById(R.id.product_name_text)
@@ -38,7 +38,7 @@ class LikesViewHolder(
         itemView.setOnClickListener(this)
         favoriteButton.setOnClickListener {
             val product = item ?: return@setOnClickListener
-            if (product.liked == true) {
+            if (product.liked) {
                 likeClickListener.onLike(product, adapterPosition)
             } else {
                 likeClickListener.onUnlike(product, adapterPosition)

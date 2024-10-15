@@ -111,7 +111,7 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
     }
 
     suspend fun deleteShoppingCartItem(
-        id: Int,
+        id: String,
         token: String,
         deleteShoppingCartBody: DeleteShoppingCartBody
     ) {
