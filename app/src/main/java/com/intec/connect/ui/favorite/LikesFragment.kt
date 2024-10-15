@@ -95,7 +95,6 @@ class LikesFragment : Fragment() {
                 startProductDetailActivity(context, item)
             }
 
-
         }, object : LikeClickListener {
             override fun onLike(product: Product, position: Int) {
             }

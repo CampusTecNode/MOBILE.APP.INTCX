@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,8 +10,9 @@
         android:id="@+id/productImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:background="@drawable/notifications_24dp_fill1"
+        android:backgroundTint="@color/primary_color"
         android:scaleType="centerCrop"
-        android:src="@drawable/notification_icon_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,15 +22,16 @@
         android:id="@+id/productTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:maxLines="1"
         android:text="We Have New Products With Offers"
         android:textColor="?android:attr/textColor"
         android:textSize="16sp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
-    app:layout_constraintEnd_toStartOf="@+id/timeText"
-    app:layout_constraintStart_toEndOf="@+id/productImage"
-    app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/timeText"
+        app:layout_constraintStart_toEndOf="@+id/productImage"
+        app:layout_constraintTop_toTopOf="@+id/productImage" />
 
     <!-- Tiempo transcurrido -->
     <TextView
@@ -38,22 +39,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="6 min ago"
-        android:textSize="14sp"
         android:textColor="?android:attr/textColor"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/productTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/productTitle" />
 
     <!-- Precio original del producto -->
     <TextView
         android:id="@+id/productPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="?android:attr/textColor"
         android:textSize="14sp"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="8dp"
-    app:layout_constraintStart_toEndOf="@+id/productImage"
-    app:layout_constraintTop_toBottomOf="@id/productTitle" />
+        app:layout_constraintBottom_toBottomOf="@+id/productImage"
+        app:layout_constraintStart_toEndOf="@+id/productImage"
+        app:layout_constraintTop_toBottomOf="@id/productTitle" />
 
     <!-- Punto de notificación -->
     <View
@@ -61,8 +64,8 @@
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:background="@drawable/notification_dot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timeText"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/timeText"
+        app:layout_constraintTop_toBottomOf="@id/timeText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
