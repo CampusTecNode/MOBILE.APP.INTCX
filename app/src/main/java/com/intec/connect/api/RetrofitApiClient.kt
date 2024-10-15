@@ -4,6 +4,8 @@ import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
 import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
+import com.intec.connect.data.model.Notification
+import com.intec.connect.data.model.NotificationBody
 import com.intec.connect.data.model.Product
 import com.intec.connect.data.model.SendResetPassword
 import com.intec.connect.data.model.ShoppingCartBody
@@ -77,5 +79,17 @@ interface RetrofitApiClient {
 
     @POST("auth/send-reset-email")
     suspend fun sendResetPasswordRequest(@Body sendResetPassword: SendResetPassword)
+
+    @POST("/notifications/")
+    suspend fun saveNotification(
+        @Body notificationBody: NotificationBody,
+        @Header("Authorization") authHeader: String,
+    )
+
+    @GET("/notifications/{userID}")
+    suspend fun getNotifications(
+        @Path("userID") userId: String,
+        @Header("Authorization") token: String
+    ): List<Notification>
 
 }

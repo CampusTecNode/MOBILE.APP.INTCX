@@ -6,6 +6,8 @@ import com.intec.connect.data.model.AuthResponse
 import com.intec.connect.data.model.CategoriesProducts
 import com.intec.connect.data.model.LikeRequest
 import com.intec.connect.data.model.LoginModel
+import com.intec.connect.data.model.Notification
+import com.intec.connect.data.model.NotificationBody
 import com.intec.connect.data.model.Product
 import com.intec.connect.data.model.SendResetPassword
 import com.intec.connect.data.model.ShoppingCartBody
@@ -125,6 +127,14 @@ class RetrofitRepository @Inject constructor(private val userAPI: RetrofitApiCli
             productId,
             token
         )
+    }
+
+    suspend fun saveNotification(notificationBody: NotificationBody, token: String) {
+        userAPI.saveNotification(notificationBody, token)
+    }
+
+    suspend fun getNotifications(userId: String, token: String): List<Notification> {
+        return userAPI.getNotifications(userId, token)
     }
 
 }

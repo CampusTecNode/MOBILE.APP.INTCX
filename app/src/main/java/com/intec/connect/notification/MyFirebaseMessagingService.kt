@@ -13,12 +13,22 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import com.intec.connect.R
+import com.intec.connect.api.RetrofitApiClient
+import com.intec.connect.repository.RetrofitRepository
 import com.intec.connect.ui.activities.BottomNavigationActivity
+import com.intec.connect.ui.notifications.NotificationsViewModel
+import com.intec.connect.utilities.Constants
+import com.intec.connect.utilities.Constants.TOKEN_KEY
+import com.intec.connect.utilities.Constants.USERID_KEY
+import com.intec.connect.utilities.NotificationType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
     }
@@ -36,9 +46,47 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val title = it.title ?: getString(R.string.app_name)
             val body = it.body ?: ""
             sendNotification(title, body)
-            saveNotificationToJsonFile(title, body) // Save to JSON file
+            saveNotificationToJsonFile(title, body)
+
+            // Enviar la notificación al backend
+            sendNotificationToBackend(title, body)
+        }
+
+    }
+
+    private fun sendNotificationToBackend(title: String?, body: String?) {
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val userAPI = retrofit.create(RetrofitApiClient::class.java)
+        val repository = RetrofitRepository(userAPI)
+        val sharedPrefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userId = sharedPrefs.getString(USERID_KEY, "") ?: ""
+        val token = sharedPrefs.getString(TOKEN_KEY, "") ?: ""
+
+        if (userId.isNotEmpty() && token.isNotEmpty()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val notificationsViewModel = NotificationsViewModel(repository = repository)
+                    notificationsViewModel.saveNotification(
+                        title ?: "",
+                        body ?: "",
+                        userId,
+                        NotificationType.NEW_PRODUCT.name,
+                        token
+                    )
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error sending notification to backend: ${e.message}", e)
+                }
+            }
+        } else {
+            Log.w(TAG, "User ID or token not found. Cannot send notification to backend.")
         }
     }
+
 
     private fun saveNotificationToJsonFile(title: String?, messageBody: String?) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -52,14 +100,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 val gson = Gson()
                 val jsonData = gson.toJson(notificationData)
 
-                // Get SharedPreferences
                 val sharedPrefs = getSharedPreferences("notifications", Context.MODE_PRIVATE)
                 val editor = sharedPrefs.edit()
 
-                // Create a unique key for the notification (e.g., using timestamp)
                 val key = "notification_${System.currentTimeMillis()}"
 
-                // Store the JSON data in SharedPreferences
                 editor.putString(key, jsonData)
                 editor.apply()
 
